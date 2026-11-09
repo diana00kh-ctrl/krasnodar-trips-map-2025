@@ -1,0 +1,2882 @@
+
+<!DOCTYPE html>
+<html lang="ru-RU">
+  <head>
+    <meta charset="utf-8" />
+    <title>Краснодарский край · поездки на человека в год · 2025</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      href="vendor/maplibre-gl.css"
+      rel="stylesheet"
+    />
+    
+    <style>/* LLMaps base styles — injected into standalone HTML at render time */
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+#map-root {
+  position: absolute;
+  inset: 0;
+}
+
+/* Comparison mode: maplibre-gl-compare plugin */
+#llmaps-comparison-container {
+  position: absolute;
+  inset: 0;
+  user-select: none;
+}
+.llmaps-compare-map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+/* Styles for maplibre-gl-compare slider (from plugin style.css) */
+.maplibregl-compare {
+  background-color: #fff;
+  position: absolute;
+  width: 2px;
+  height: 100%;
+  z-index: 1;
+}
+.maplibregl-compare .compare-swiper-vertical {
+  background-color: #3887be;
+  box-shadow: inset 0 0 0 2px #fff;
+  display: inline-block;
+  border-radius: 50%;
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  top: 50%;
+  left: -30px;
+  margin: -30px 1px 0;
+  color: #fff;
+  cursor: ew-resize;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath fill='%23fff' d='M25 24L16 30L25 36L25 24zM35 24L35 36L44 30L35 24z'/%3E%3C/svg%3E");
+}
+.maplibregl-compare-horizontal {
+  position: relative;
+  width: 100%;
+  height: 2px;
+}
+.maplibregl-compare .compare-swiper-horizontal {
+  background-color: #3887be;
+  box-shadow: inset 0 0 0 2px #fff;
+  display: inline-block;
+  border-radius: 50%;
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  top: 50%;
+  left: 50%;
+  margin: -30px 1px 0;
+  cursor: ns-resize;
+  transform: rotate(90deg);
+}
+
+/* Legend — shadcn/ui Card style */
+.llmaps-legend {
+  position: absolute;
+  z-index: 10;
+  background: #ffffff;
+  padding: 0;
+  font-size: 14px;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e5e7eb;
+  overflow: hidden;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  max-width: 300px;
+  min-width: 200px;
+  user-select: none;
+}
+.llmaps-legend.collapsed {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 12px;
+  min-width: 40px;
+  max-width: 40px;
+}
+.llmaps-legend.top-left { top: 12px; left: 12px; }
+.llmaps-legend.top-right { top: 12px; right: 12px; }
+.llmaps-legend.bottom-left { bottom: 12px; left: 12px; }
+.llmaps-legend.bottom-right { bottom: 12px; right: 12px; }
+
+.llmaps-legend-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px 12px 20px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.llmaps-legend-header:hover {
+  background: #f9fafb;
+}
+.llmaps-legend-title {
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: #0a0a0a;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.llmaps-legend.collapsed .llmaps-legend-title,
+.llmaps-legend.collapsed .llmaps-legend-content {
+  display: none;
+}
+.llmaps-legend-toggle-btn {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: background 0.15s;
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+.llmaps-legend-toggle-btn:hover {
+  background: #f3f4f6;
+}
+.llmaps-legend-toggle-btn svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  color: #6b7280;
+}
+/* Dual icons: chevron (expanded) / layers (collapsed) */
+.llmaps-legend-toggle-btn .llmaps-layers-icon {
+  display: none;
+}
+.llmaps-legend-toggle-btn .llmaps-chevron-icon {
+  display: block;
+}
+.llmaps-legend.collapsed .llmaps-legend-header {
+  padding: 0;
+  justify-content: center;
+}
+.llmaps-legend.collapsed .llmaps-legend-toggle-btn {
+  margin: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+}
+.llmaps-legend.collapsed .llmaps-legend-toggle-btn .llmaps-chevron-icon {
+  display: none;
+}
+.llmaps-legend.collapsed .llmaps-legend-toggle-btn .llmaps-layers-icon {
+  display: block;
+}
+
+.llmaps-legend-content {
+  padding: 0 20px 20px 20px;
+}
+.llmaps-legend ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.llmaps-legend ul li {
+  display: flex;
+  flex-direction: column;
+}
+
+.llmaps-legend-item {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 10px;
+  padding: 4px 6px;
+  border-radius: 6px;
+  transition: background 0.15s;
+}
+.llmaps-legend-item:hover {
+  background: #f9fafb;
+}
+.llmaps-legend-item.hidden .llmaps-legend-icon {
+  opacity: 0.4;
+}
+.llmaps-legend-item.hidden .llmaps-legend-item-label {
+  color: #9ca3af;
+  text-decoration: line-through;
+}
+
+/* Icons for different layer types */
+.llmaps-legend-icon {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  transition: opacity 0.15s;
+}
+.llmaps-legend-icon.circle { border-radius: 50%; }
+.llmaps-legend-icon.line { height: 3px; border-radius: 2px; width: 16px; }
+
+.llmaps-legend-item-label {
+  flex-grow: 1;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #374151;
+  transition: color 0.15s;
+}
+
+.llmaps-legend-ramp {
+  margin-top: 6px;
+  margin-left: 26px;
+  height: 10px;
+  border-radius: 5px;
+  width: calc(100% - 26px);
+}
+.llmaps-legend-ramp-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4px;
+  margin-left: 26px;
+  width: calc(100% - 26px);
+  font-size: 11px;
+  color: #6b7280;
+}
+.llmaps-legend-basemap {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #e5e7eb;
+}
+.llmaps-legend-basemap-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #6b7280;
+  margin-bottom: 8px;
+}
+.llmaps-basemap-select-wrap {
+  width: 100%;
+}
+.llmaps-basemap-select {
+  display: block;
+  width: 100%;
+  padding: 8px 32px 8px 12px;
+  font-size: 13px;
+  font-family: inherit;
+  line-height: 1.4;
+  color: #0a0a0a;
+  background-color: #ffffff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7280' d='M6 8L2 4h8z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.llmaps-basemap-select:hover {
+  border-color: #9ca3af;
+}
+.llmaps-basemap-select:focus {
+  outline: none;
+  border-color: #6b7280;
+  box-shadow: 0 0 0 3px rgba(107, 114, 128, 0.15);
+}
+
+/* Basemap switcher (standalone) */
+.llmaps-basemap-switcher {
+  position: absolute;
+  z-index: 10;
+  background: #ffffff;
+  padding: 12px;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e5e7eb;
+}
+.llmaps-basemap-switcher .llmaps-basemap-select-wrap {
+  min-width: 140px;
+}
+.llmaps-basemap-switcher .llmaps-basemap-select {
+  max-width: none;
+  min-width: 140px;
+  border-radius: 8px;
+}
+.llmaps-basemap-switcher.top-left { top: 12px; left: 12px; }
+.llmaps-basemap-switcher.top-right { top: 12px; right: 12px; }
+.llmaps-basemap-switcher.bottom-left { bottom: 12px; left: 12px; }
+.llmaps-basemap-switcher.bottom-right { bottom: 12px; right: 12px; }
+
+/* Search */
+.llmaps-search-wrap {
+  position: absolute;
+  z-index: 10;
+  padding: 6px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+.llmaps-search-wrap.top-left { top: 12px; left: 12px; }
+.llmaps-search-wrap.top-right { top: 12px; right: 12px; }
+.llmaps-search-wrap input {
+  width: 220px;
+  padding: 8px 12px;
+  font-size: 13px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.7);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.llmaps-search-wrap input:focus {
+  border-color: rgba(0, 0, 0, 0.3);
+}
+.llmaps-search-suggestions {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  max-height: 240px;
+  overflow-y: auto;
+  display: none;
+  z-index: 11;
+}
+.llmaps-search-suggestions.visible {
+  display: block;
+}
+.llmaps-search-suggestions div {
+  padding: 8px;
+  cursor: pointer;
+}
+.llmaps-search-suggestions div:hover {
+  background: #f0f0f0;
+}
+
+/* Server-rendered legend: new elements (wibemaps-inspired, llmaps aesthetics) */
+
+/* Map title section with separator */
+.llmaps-legend-map-title-section {
+  padding: 0 0 12px 0;
+  border-bottom: 2px solid #e5e7eb;
+  margin-bottom: 12px;
+}
+.llmaps-legend-map-title {
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: -0.01em;
+  color: #0a0a0a;
+}
+
+/* Section separator (between layers) */
+.llmaps-legend-section-separator {
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* Layer header with toggle */
+.llmaps-legend-layer-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 6px;
+  border-radius: 6px;
+  transition: background 0.15s;
+}
+.llmaps-legend-layer-header:hover {
+  background: #f9fafb;
+}
+
+/* Layer description text */
+.llmaps-legend-description {
+  font-size: 11px;
+  color: #6b7280;
+  margin-top: 2px;
+  margin-left: 32px;
+  line-height: 1.4;
+}
+
+/* iOS-style toggle switch */
+.llmaps-layer-toggle {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+.llmaps-layer-toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.llmaps-toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #d1d5db;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 24px;
+}
+.llmaps-toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+.llmaps-layer-toggle input:checked + .llmaps-toggle-slider {
+  background-color: #0a0a0a;
+}
+.llmaps-layer-toggle input:checked + .llmaps-toggle-slider:before {
+  transform: translateX(20px);
+}
+.llmaps-layer-toggle:hover .llmaps-toggle-slider {
+  background-color: #9ca3af;
+}
+.llmaps-layer-toggle input:checked:hover + .llmaps-toggle-slider {
+  background-color: #27272a;
+}
+
+/* Collapsible Tips section */
+.llmaps-legend-instructions {
+  margin-top: 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.llmaps-legend-instructions-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  cursor: pointer;
+  background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+  transition: background 0.15s;
+}
+.llmaps-legend-instructions-header:hover {
+  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+}
+.llmaps-legend-instructions-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #374151;
+}
+.llmaps-legend-instructions-arrow {
+  font-size: 10px;
+  color: #6b7280;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.llmaps-legend-instructions-header.collapsed .llmaps-legend-instructions-arrow {
+  transform: rotate(-90deg);
+}
+.llmaps-legend-instructions-content {
+  max-height: 300px;
+  overflow: hidden;
+  transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: #ffffff;
+}
+.llmaps-legend-instructions-content.collapsed {
+  max-height: 0;
+}
+.llmaps-legend-instructions-list {
+  margin: 0;
+  padding: 12px 16px;
+  list-style: none;
+  font-size: 12px;
+  color: #555;
+  line-height: 1.8;
+}
+.llmaps-legend-instructions-list li {
+  margin-bottom: 10px;
+  padding: 6px 0;
+  white-space: normal;
+  word-break: break-word;
+}
+.llmaps-legend-instructions-list li:last-child {
+  margin-bottom: 0;
+}
+.llmaps-legend-instructions-list strong {
+  font-weight: 500;
+  color: #374151;
+}
+
+/* Dashboard — persistent map overlay */
+.llmaps-dashboard {
+  position: absolute;
+  z-index: 15;
+  width: var(--llmaps-dashboard-width, 360px);
+  max-width: min(calc(100vw - 24px), var(--llmaps-dashboard-width, 360px));
+  max-height: var(--llmaps-dashboard-height, calc(100vh - 24px));
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(229, 231, 235, 0.95);
+  border-radius: 16px;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.16);
+  overflow: hidden;
+}
+.llmaps-dashboard.top-left { top: 12px; left: 12px; }
+.llmaps-dashboard.top-right { top: 12px; right: 12px; }
+.llmaps-dashboard.bottom-left { bottom: 12px; left: 12px; }
+.llmaps-dashboard.bottom-right { bottom: 12px; right: 12px; }
+.llmaps-dashboard.collapsed {
+  width: auto;
+}
+.llmaps-dashboard.collapsed .llmaps-dashboard-body {
+  display: none;
+}
+.llmaps-dashboard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(229, 231, 235, 0.9);
+}
+.llmaps-dashboard-title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: #111827;
+}
+.llmaps-dashboard-toggle {
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: 8px;
+  background: #f3f4f6;
+  color: #111827;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+}
+.llmaps-dashboard-toggle:hover {
+  background: #e5e7eb;
+}
+.llmaps-dashboard-body {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.llmaps-dashboard-filters {
+  display: grid;
+  gap: 10px;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(229, 231, 235, 0.9);
+  background: rgba(249, 250, 251, 0.72);
+}
+.llmaps-dashboard-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.llmaps-dashboard-filter-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.llmaps-dashboard-filter-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 9px 11px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  background: #fff;
+  font: inherit;
+  color: #111827;
+}
+.llmaps-dashboard-filter-input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+.llmaps-dashboard-content {
+  padding: 16px;
+  overflow: auto;
+  color: #111827;
+}
+.llmaps-dashboard-content.is-empty {
+  color: #6b7280;
+}
+.llmaps-dashboard-empty {
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* Sidebar — sliding panel for feature details */
+.llmaps-sidebar {
+  position: fixed;
+  top: 0;
+  width: var(--llmaps-sidebar-width, 400px);
+  height: 100vh;
+  background: #ffffff;
+  box-shadow: -2px 0 12px rgba(0, 0, 0, 0.08);
+  border-left: 1px solid #e5e7eb;
+  z-index: 20;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-y: auto;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+.llmaps-sidebar.right {
+  right: 0;
+  transform: translateX(100%);
+}
+.llmaps-sidebar.left {
+  left: 0;
+  transform: translateX(-100%);
+  border-left: none;
+  border-right: 1px solid #e5e7eb;
+  box-shadow: 2px 0 12px rgba(0, 0, 0, 0.08);
+}
+.llmaps-sidebar.open {
+  transform: translateX(0);
+}
+
+.llmaps-sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  border-bottom: 1px solid #e5e7eb;
+  background: #f9fafb;
+}
+.llmaps-sidebar-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #0a0a0a;
+  letter-spacing: -0.01em;
+}
+.llmaps-sidebar-close {
+  background: none;
+  border: none;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #6b7280;
+  font-size: 18px;
+  transition: background 0.15s, color 0.15s;
+  flex-shrink: 0;
+}
+.llmaps-sidebar-close:hover {
+  background: #e5e7eb;
+  color: #0a0a0a;
+}
+
+.llmaps-sidebar-content {
+  padding: 20px;
+}
+
+.llmaps-sidebar-section {
+  margin-bottom: 24px;
+}
+.llmaps-sidebar-section:last-child {
+  margin-bottom: 0;
+}
+
+.llmaps-sidebar-field {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 8px 0;
+  border-bottom: 1px solid #f3f4f6;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.llmaps-sidebar-field:last-child {
+  border-bottom: none;
+}
+.llmaps-sidebar-field-label {
+  color: #6b7280;
+  font-weight: 500;
+  flex-shrink: 0;
+  margin-right: 16px;
+}
+.llmaps-sidebar-field-value {
+  color: #0a0a0a;
+  text-align: right;
+}
+.llmaps-sidebar-field-value a {
+  color: #2563eb;
+  text-decoration: underline;
+  word-break: break-all;
+}
+
+/* Popup (MapLibre) content */
+.maplibregl-popup-content {
+  max-width: 300px;
+  word-wrap: break-word;
+}
+.maplibregl-popup-content table {
+  width: 100%;
+}
+.maplibregl-popup-content td:first-child {
+  max-width: 120px;
+  font-weight: 600;
+  padding-right: 12px;
+  vertical-align: top;
+}
+.maplibregl-popup-content td:last-child {
+  word-break: break-word;
+}
+
+@media (max-width: 768px) {
+  .llmaps-dashboard {
+    top: 12px;
+    right: 12px;
+    left: 12px;
+    bottom: auto;
+    width: auto;
+    max-width: none;
+    max-height: min(60vh, var(--llmaps-dashboard-height, 60vh));
+  }
+
+  .llmaps-sidebar {
+    width: 100% !important;
+  }
+}
+
+/* FeatureSearch — search within map data */
+.llmaps-feature-search {
+  position: absolute;
+  z-index: 15;
+  width: 360px;
+}
+.llmaps-feature-search.top-left { top: 12px; left: 50px; }
+.llmaps-feature-search.top-right { top: 12px; right: 12px; }
+.llmaps-feature-search.top-center { top: 12px; left: 50%; transform: translateX(-50%); }
+
+.llmaps-feature-search-input {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-family: inherit;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.llmaps-feature-search-input:focus {
+  border-color: rgba(0, 0, 0, 0.25);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.12);
+}
+
+.llmaps-feature-search-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 10px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  max-height: 320px;
+  overflow-y: auto;
+  z-index: 16;
+}
+.llmaps-feature-search-dropdown.visible {
+  display: block;
+}
+.llmaps-feature-search-item {
+  padding: 10px 14px;
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 1.4;
+  border-bottom: 1px solid #f3f4f6;
+  transition: background 0.12s;
+}
+.llmaps-feature-search-item:last-child {
+  border-bottom: none;
+}
+.llmaps-feature-search-item:hover {
+  background: #f3f4f6;
+}
+.llmaps-feature-search-item-source {
+  font-size: 11px;
+  color: #9ca3af;
+  margin-left: 6px;
+}
+.llmaps-feature-search-empty {
+  padding: 10px 14px;
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+  :root { --hse-red:#EE3426; --hse-red-soft:#FF6A5C; --panel:#101014; --panel-2:#17171d; --ink:#f4f4f6; --ink-dim:#a8a8b3; }
+  html, body { margin:0; background:#0b0b0e; font-family:'Inter','HSE Sans',-apple-system,'Segoe UI',sans-serif; }
+  .maplibregl-map { font-family: inherit; }
+
+  /* шапка */
+  #kk-header { position:fixed; top:0; left:0; right:0; z-index:50; pointer-events:none;
+    padding:22px 28px 0 76px; }
+  #kk-header .kk-kicker { color:var(--hse-red); font-weight:700; font-size:11px; letter-spacing:.22em;
+    text-transform:uppercase; margin-bottom:6px; text-shadow:0 1px 8px rgba(0,0,0,.8); }
+  #kk-header h1 { color:var(--ink); font-size:26px; line-height:1.15; font-weight:800; margin:0 0 4px;
+    letter-spacing:-0.01em; text-shadow:0 1px 10px rgba(0,0,0,.85); }
+  #kk-header .kk-sub { color:var(--ink-dim); font-size:13px; font-weight:500; text-shadow:0 1px 8px rgba(0,0,0,.8); }
+  #kk-header .kk-bar { width:64px; height:4px; background:var(--hse-red); margin-top:10px; border-radius:2px; }
+
+  /* легенда */
+  #kk-legend { position:fixed; top:20px; right:20px; z-index:60; width:322px; max-height:calc(100vh - 40px);
+    overflow:auto; background:rgba(16,16,20,.94); backdrop-filter:blur(8px);
+    border:1px solid rgba(255,255,255,.09); border-left:3px solid var(--hse-red);
+    border-radius:10px; padding:16px 18px 14px; color:var(--ink); box-shadow:0 12px 40px rgba(0,0,0,.55); }
+  #kk-legend h2 { font-size:14px; font-weight:700; margin:0 0 2px; letter-spacing:.01em; }
+  #kk-legend .kk-src { font-size:10.5px; color:var(--ink-dim); margin:0 0 12px; }
+  #kk-legend .kk-row { display:flex; gap:12px; align-items:flex-start; margin:10px 0; }
+  #kk-legend .kk-sym { flex:0 0 44px; display:flex; justify-content:center; padding-top:2px; }
+  #kk-legend p { margin:0; font-size:11.5px; line-height:1.45; color:var(--ink-dim); }
+  #kk-legend p b { color:var(--ink); font-weight:600; }
+  #kk-legend .kk-scale { display:flex; align-items:flex-end; gap:14px; margin:6px 0 2px; }
+  #kk-legend .kk-scale .kk-item { text-align:center; font-size:10px; color:var(--ink-dim); }
+  #kk-legend .kk-range { font-size:11.5px; color:var(--ink-dim); margin-top:8px; }
+  #kk-legend .kk-range b { color:var(--hse-red-soft); font-weight:700; font-variant-numeric:tabular-nums; }
+  #kk-legend details { margin-top:10px; font-size:11px; color:var(--ink-dim); }
+  #kk-legend details summary { cursor:pointer; outline:none; }
+  #kk-legend details li { margin:2px 0; }
+  #kk-legend .kk-divider { height:1px; background:rgba(255,255,255,.09); margin:12px 0; }
+  #kk-legend .kk-source-note { font-size:10.5px; color:var(--ink-dim); line-height:1.5; }
+  #kk-legend .kk-source-note b { color:var(--ink); }
+
+  /* маркеры-кольца */
+  .kk-marker { cursor:pointer; }
+  .kk-marker svg { display:block; overflow:visible; }
+  .kk-pop { fill:rgba(16,16,22,.42); stroke:rgba(255,255,255,.30); stroke-width:1; }
+  .kk-anchor { fill:rgba(255,255,255,.85); }
+  .kk-nodata { fill:rgba(255,255,255,.05); stroke:rgba(255,255,255,.38);
+    stroke-width:1.1; stroke-dasharray:2.4 2.4; }
+  .kk-arc { fill:none; stroke:var(--hse-red); stroke-width:2.7; stroke-linecap:round; }
+  .kk-glow { fill:none; stroke:var(--hse-red-soft); stroke-width:6; stroke-linecap:round;
+    opacity:.5; filter:url(#kk-glow-f); }
+  .kk-hit { fill:transparent; }
+  .kk-marker:hover .kk-pop, .kk-marker:hover .kk-nodata { stroke:rgba(255,255,255,.85); }
+
+  /* всплывающая подсказка */
+  .kk-tip { position:absolute; bottom:calc(100% + 10px); left:50%; transform:translateX(-50%);
+    min-width:170px; background:rgba(12,12,16,.97); border:1px solid rgba(255,255,255,.14);
+    border-top:2px solid var(--hse-red); border-radius:8px; padding:9px 12px;
+    opacity:0; visibility:hidden; transition:opacity .12s; pointer-events:none; z-index:200;
+    box-shadow:0 10px 30px rgba(0,0,0,.6); white-space:nowrap; }
+  .kk-marker:hover .kk-tip { opacity:1; visibility:visible; }
+  .kk-tip .kk-t-name { font-size:12.5px; font-weight:700; color:var(--ink); margin-bottom:4px; }
+  .kk-tip .kk-t-row { font-size:11px; color:var(--ink-dim); display:flex; justify-content:space-between; gap:14px; }
+  .kk-tip .kk-t-row span:last-child { color:var(--ink); font-weight:600; font-variant-numeric:tabular-nums; }
+  .kk-tip .kk-t-row .kk-na { color:#8a8a95; font-weight:400; font-style:italic; }
+  .kk-tip .kk-t-row .kk-hl { color:var(--hse-red-soft); }
+  .maplibregl-ctrl-attrib { background:rgba(11,11,14,.7) !important; color:#8a8a95 !important; }
+  .maplibregl-ctrl-attrib a { color:#a8a8b3 !important; }
+</style>
+  </head>
+  <body>
+
+    <div id="map-root"></div>
+
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <filter id="kk-glow-f" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="2.2"/>
+    </filter>
+  </defs>
+</svg>
+
+<header id="kk-header">
+  <div class="kk-kicker">Росстат · 2025</div>
+  <h1>Поездки на человека в год</h1>
+  <div class="kk-sub">Краснодарский край · городские и сельские населённые пункты</div>
+  <div class="kk-bar"></div>
+</header>
+
+<aside id="kk-legend">
+  <h2>Как читать карту</h2>
+  <p class="kk-src">Кольцевые диаграммы · источник данных — Росстат, 2025</p>
+
+  <div class="kk-row">
+    <div class="kk-sym">
+      <svg width="44" height="44" viewBox="-22 -22 44 44">
+        <circle r="14" class="kk-pop"/>
+        <circle r="1.6" class="kk-anchor"/>
+        <path class="kk-arc" d="M 0 -14 A 14 14 0 1 1 -13.85 1.76"/>
+        <path class="kk-glow" d="M 0 -14 A 14 14 0 1 1 -13.85 1.76"/>
+      </svg>
+    </div>
+    <p><b>Длина светящегося кольца</b> — число поездок в год на одного жителя. Кольцо начинается сверху и «растёт» по часовой стрелке до полного круга.</p>
+  </div>
+
+  <div class="kk-row">
+    <div class="kk-sym">
+      <svg width="44" height="44" viewBox="-22 -22 44 44">
+        <circle r="13" class="kk-pop"/>
+        <circle r="5.5" class="kk-pop" cx="10" cy="10"/>
+        <circle r="1.6" class="kk-anchor"/>
+      </svg>
+    </div>
+    <p><b>Площадь круга</b> — численность населения населённого пункта (радиус пропорционален корню из населения). Точка-якорь в центре помогает найти малые пункты.</p>
+  </div>
+
+  <div class="kk-divider"></div>
+
+  <div class="kk-scale" id="kk-scale-rings"></div>
+  <p class="kk-range">Диапазон показателя 2025: <b id="kk-range-text"></b> поездок на человека в год.</p>
+
+  <div class="kk-row" style="margin-top:12px">
+    <div class="kk-sym">
+      <svg width="44" height="44" viewBox="-22 -22 44 44">
+        <circle r="9" class="kk-nodata"/>
+      </svg>
+    </div>
+    <p><b>Серый пунктирный круг</b> — поездки не публикуются (нет данных). Пропуски не заменены нулями: таких пунктов <b id="kk-nodata-count"></b> из <span id="kk-total-count"></span>.</p>
+  </div>
+
+  <details>
+    <summary id="kk-nocoord-summary">Не отображены — нет координат (5)</summary>
+    <ul id="kk-nocoord-list"></ul>
+  </details>
+
+  <div class="kk-divider"></div>
+  <p class="kk-source-note"><b>Источник:</b> Росстат, 2025 (данные файла «краснодарский_край_транспорт_2025.csv»). Координаты — из исходного файла (геокодированные названия по справочнику омонимов); население сопоставлено по типу НП. Базовая карта © Esri, Maxar, Earthstar Geographics.</p>
+</aside>
+
+    <script id="llmaps-config" type="application/json">
+      {"title": "\u041a\u0440\u0430\u0441\u043d\u043e\u0434\u0430\u0440\u0441\u043a\u0438\u0439 \u043a\u0440\u0430\u0439 \u00b7 \u043f\u043e\u0435\u0437\u0434\u043a\u0438 \u043d\u0430 \u0447\u0435\u043b\u043e\u0432\u0435\u043a\u0430 \u0432 \u0433\u043e\u0434 \u00b7 2025", "center": [39.6, 45.35], "zoom": 7.2, "tiles": {"id": "carto-dark", "name": "Carto Dark", "url_template": "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}", "subdomains": [], "subdomains": ["a", "b", "c", "d"], "attribution": "\u00a9 Esri, Maxar, Earthstar Geographics | \u00a9 <a href=\"https://github.com/greadr71/LLMaps\" target=\"_blank\">LLMaps</a>"}, "layers": [], "locale": "ru-RU", "hash_position": false, "custom_attribution": "\u00a9 <a href=\"https://github.com/greadr71/LLMaps\" target=\"_blank\">LLMaps</a>", "components": [{"type": "controls", "zoom": true, "scale": true, "fullscreen": false, "hash": false}], "embedded": true, "use_compression": true, "lazy_init": false, "max_active_maps": 8, "map_instance_count": 1, "sources": {}, "visibility_optimization_source_ids": [], "embedded_sources": {}}
+    </script>
+    <script src="vendor/maplibre-gl.js"></script>
+    
+    
+    
+    
+    
+    <script src="https://unpkg.com/pako@2.1.0/dist/pako.min.js"></script>
+    <script src="https://unpkg.com/pbf@3.2.1/dist/pbf.js"></script>
+    <script src="https://unpkg.com/geobuf@3.0.2/dist/geobuf.js"></script>
+    
+    <script>window.llmapsData = {"settlements": [{"name": "с Борисовка", "full_name": "село Борисовка", "oktmo": "3720000116", "population": 3188.0, "lat": 44.75517652200006, "lon": 37.69424798100005, "trips": 773.6825595984943, "population_source": "тип"}, {"name": "х Семигорский", "full_name": "хутор Семигорский", "oktmo": "3720000201", "population": 400.0, "lat": 44.88251437200007, "lon": 37.60527312000005, "trips": 268.75, "population_source": "тип"}, {"name": "г Краснодар", "full_name": "город Краснодар", "oktmo": "3701000001", "population": 918145.0, "lat": 45.03547166900007, "lon": 38.97531518200003, "trips": 95.76819565537033, "population_source": "тип"}, {"name": "ст-ца Раевская", "full_name": "станица Раевская", "oktmo": "3720000191", "population": 10020.0, "lat": 44.83628295800003, "lon": 37.54969185200008, "trips": 82.9940119760479, "population_source": "тип"}, {"name": "ст-ца Голубицкая", "full_name": "станица Голубицкая", "oktmo": "3651407101", "population": 5570.0, "lat": 45.32331798900003, "lon": 37.27495819900003, "trips": 78.1867145421903, "population_source": "тип"}, {"name": "г Новороссийск", "full_name": "город Новороссийск", "oktmo": "3720000001", "population": 275197.0, "lat": 44.72377252300003, "lon": 37.76880947300003, "trips": 75.41564769964789, "population_source": "тип"}, {"name": "с Абрау-Дюрсо", "full_name": "село Абрау-Дюрсо", "oktmo": "3720000106", "population": 3519.0, "lat": 44.69862348800007, "lon": 37.60302867500008, "trips": 74.16879795396419, "population_source": "тип"}, {"name": "г Туапсе", "full_name": "город Туапсе", "oktmo": "3555000001", "population": 61180.0, "lat": 44.09464322200006, "lon": 39.07309771800004, "trips": 72.36204642039883, "population_source": "тип"}, {"name": "г Анапа", "full_name": "город Анапа", "oktmo": "3501000001", "population": 75865.0, "lat": 44.89496496000004, "lon": 37.31617741700006, "trips": 67.38957358465696, "population_source": "тип"}, {"name": "с Мысхако", "full_name": "село Мысхако", "oktmo": "3720000176", "population": 7954.0, "lat": 44.65729526000007, "lon": 37.76052452000005, "trips": 64.75986924817701, "population_source": "тип"}, {"name": "г Апшеронск", "full_name": "город Апшеронск", "oktmo": "3605101001", "population": 39762.0, "lat": 44.46539911900004, "lon": 39.72678523100006, "trips": 48.09441174991198, "population_source": "тип"}, {"name": "ст-ца Фастовецкая", "full_name": "станица Фастовецкая", "oktmo": "3654422101", "population": 8700.0, "lat": 45.91723689400004, "lon": 40.15219907900007, "trips": 41.33793103448276, "population_source": "тип"}, {"name": "с Гайдук", "full_name": "село Гайдук", "oktmo": "3720000136", "population": 7484.0, "lat": 44.78376324900007, "lon": 37.69916385000005, "trips": 39.61785141635489, "population_source": "тип"}, {"name": "г Славянск-на-Кубани", "full_name": "город Славянск-на-Кубани", "oktmo": "3645101001", "population": 67919.0, "lat": 45.26032972600007, "lon": 38.12822320300006, "trips": 37.19062412579691, "population_source": "тип"}, {"name": "г Курганинск", "full_name": "город Курганинск", "oktmo": "3627101001", "population": 48689.0, "lat": 44.88764678600006, "lon": 40.59137149000003, "trips": 29.48633161494383, "population_source": "тип"}, {"name": "ст-ца Новотитаровская", "full_name": "станица Новотитаровская", "oktmo": "3614416101", "population": 24754.0, "lat": 45.23654820300004, "lon": 38.97176800600005, "trips": 28.83170396703563, "population_source": "тип"}, {"name": "г Кропоткин", "full_name": "город Кропоткин", "oktmo": "3618101001", "population": 78631.0, "lat": 45.43469233600007, "lon": 40.57599899300004, "trips": 27.50314761353665, "population_source": "тип"}, {"name": "г Приморско-Ахтарск", "full_name": "город Приморско-Ахтарск", "oktmo": "3541000001", "population": 32048.0, "lat": 46.04350736400005, "lon": 38.17765185500008, "trips": 26.4053919121318, "population_source": "тип"}, {"name": "г Крымск", "full_name": "город Крымск", "oktmo": "3625101001", "population": 57927.0, "lat": 44.93543180200004, "lon": 37.98792613200004, "trips": 25.3570873685846, "population_source": "тип"}, {"name": "г Лабинск", "full_name": "город Лабинск", "oktmo": "3630101001", "population": 60164.0, "lat": 44.63571639800006, "lon": 40.72357706200006, "trips": 24.84043614121401, "population_source": "тип"}, {"name": "г Абинск", "full_name": "город Абинск", "oktmo": "3601101001", "population": 39058.0, "lat": 44.86626065300004, "lon": 38.15116890200004, "trips": 23.5593220338983, "population_source": "тип"}, {"name": "г Армавир", "full_name": "город Армавир", "oktmo": "3705000001", "population": 190709.0, "lat": 44.99765546100008, "lon": 41.12964662100006, "trips": 23.39994441793518, "population_source": "тип"}, {"name": "г Белореченск", "full_name": "город Белореченск", "oktmo": "3608101001", "population": 51590.0, "lat": 44.76601525800004, "lon": 39.86848939600003, "trips": 21.98139174258577, "population_source": "тип"}, {"name": "г Темрюк", "full_name": "город Темрюк", "oktmo": "3651101001", "population": 41413.0, "lat": 45.28204644100003, "lon": 37.36538557600005, "trips": 20.20621543959626, "population_source": "тип"}, {"name": "г Тихорецк", "full_name": "город Тихорецк", "oktmo": "3654101001", "population": 57098.0, "lat": 45.85278180900008, "lon": 40.12316849400003, "trips": 19.44936775368664, "population_source": "тип"}, {"name": "пгт Ильский", "full_name": "посёлок городского типа Ильский", "oktmo": "3643155051", "population": 25502.0, "lat": 44.83594309500006, "lon": 38.56199949600006, "trips": 17.12414712571563, "population_source": "тип"}, {"name": "ст-ца Каневская", "full_name": "станица Каневская", "oktmo": "3620402101", "population": 44386.0, "lat": 46.08480547100004, "lon": 38.97195102600006, "trips": 15.78200333438472, "population_source": "тип"}, {"name": "ст-ца Северская", "full_name": "станица Северская", "oktmo": "3643413101", "population": 22500.0, "lat": 44.85376168600004, "lon": 38.68194263400004, "trips": 11.88, "population_source": "тип"}, {"name": "ст-ца Новопокровская", "full_name": "станица Новопокровская", "oktmo": "3635419101", "population": 19100.0, "lat": 45.95382928400005, "lon": 40.70700853900007, "trips": 8.613089005235603, "population_source": "тип"}, {"name": "ст-ца Елизаветинская", "full_name": "станица Елизаветинская", "oktmo": "3701000131", "population": 24755.0, "lat": 45.04843247500003, "lon": 38.79990137400006, "trips": 4.457281357301556, "population_source": "тип"}, {"name": "аул Псебе", "full_name": "аул Псебе", "oktmo": "3555000150", "population": 530.0, "lat": 44.28590791600004, "lon": 38.95421921000008, "trips": null, "population_source": "тип"}, {"name": "г Геленджик", "full_name": "город Геленджик", "oktmo": "3708000001", "population": 76783.0, "lat": 44.56101059700006, "lon": 38.07711747600007, "trips": null, "population_source": "тип"}, {"name": "г Горячий Ключ", "full_name": "город Горячий Ключ", "oktmo": "3504000001", "population": 40299.0, "lat": 44.63424708100007, "lon": 39.13642878600007, "trips": null, "population_source": "тип"}, {"name": "г Ейск", "full_name": "город Ейск", "oktmo": "3616101001", "population": 83094.0, "lat": 46.71194140300003, "lon": 38.27265759900007, "trips": null, "population_source": "тип"}, {"name": "г Кореновск", "full_name": "город Кореновск", "oktmo": "3621101001", "population": 42019.0, "lat": 45.46274323300003, "lon": 39.44803785800008, "trips": null, "population_source": "тип"}, {"name": "г Новокубанск", "full_name": "город Новокубанск", "oktmo": "3634101001", "population": 35287.0, "lat": 45.10379761600007, "lon": 41.04393290100006, "trips": null, "population_source": "тип"}, {"name": "г Сочи", "full_name": "город Сочи", "oktmo": "3726000001", "population": 443562.0, "lat": 43.58547514500003, "lon": 39.72309522300003, "trips": null, "population_source": "тип"}, {"name": "г Тимашевск", "full_name": "город Тимашевск", "oktmo": "3653101001", "population": 50792.0, "lat": 45.61420253400007, "lon": 38.93396989600006, "trips": null, "population_source": "тип"}, {"name": "г Хадыженск", "full_name": "город Хадыженск", "oktmo": "3605109001", "population": 22468.0, "lat": 44.42280476800005, "lon": 39.53732771800003, "trips": null, "population_source": "тип"}, {"name": "п Большевик", "full_name": "посёлок Большевик", "oktmo": "3616421106", "population": 300.0, "lat": 46.51466563000008, "lon": 38.23424861800004, "trips": null, "population_source": "тип"}, {"name": "п Газырь", "full_name": "поселок Газырь", "oktmo": "3612416101", "population": 2100.0, "lat": 45.74617476400005, "lon": 39.93330883100003, "trips": null, "population_source": "тип"}, {"name": "п Знаменский", "full_name": "посёлок Знаменский", "oktmo": "3701000141", "population": 6242.0, "lat": 45.05404852700008, "lon": 39.15021325200007, "trips": null, "population_source": "тип"}, {"name": "п Индустриальный", "full_name": "посёлок Индустриальный", "oktmo": "3701000151", "population": 4785.0, "lat": 45.09245112100007, "lon": 39.10713536600008, "trips": null, "population_source": "тип"}, {"name": "п Комсомолец", "full_name": "посёлок Комсомолец", "oktmo": "3616416101", "population": 2033.0, "lat": 46.57925477600003, "lon": 38.26147440500006, "trips": null, "population_source": "тип"}, {"name": "п Лазурный", "full_name": "посёлок Лазурный", "oktmo": "3701000176", "population": 2754.0, "lat": 45.15261844300005, "lon": 39.12728824700002, "trips": null, "population_source": "тип"}, {"name": "п Парковый", "full_name": "поселок Парковый", "oktmo": "3654416101", "population": 4500.0, "lat": 45.83803316000007, "lon": 40.14686825300003, "trips": null, "population_source": "тип"}, {"name": "п Совхозный", "full_name": "посёлок Совхозный", "oktmo": "3645414101", "population": 3900.0, "lat": 45.29396497100004, "lon": 38.11215919000006, "trips": null, "population_source": "тип"}, {"name": "п Широчанка", "full_name": "посёлок Широчанка", "oktmo": "3616101136", "population": 6025.0, "lat": 46.65902803600004, "lon": 38.33207965800005, "trips": null, "population_source": "тип"}, {"name": "п им М. Горького", "full_name": "п им М. Горького", "oktmo": "3618407101", "population": null, "lat": null, "lon": null, "trips": null, "population_source": "нет"}, {"name": "пгт Афипский", "full_name": "посёлок городского типа Афипский", "oktmo": "3643152051", "population": 21499.0, "lat": 44.90334976100007, "lon": 38.84112912000006, "trips": null, "population_source": "тип"}, {"name": "пгт Ахтырский", "full_name": "посёлок городского типа Ахтырский", "oktmo": "3601153051", "population": 21067.0, "lat": 44.85035809400006, "lon": 38.29982924800004, "trips": null, "population_source": "тип"}, {"name": "пгт Гирей", "full_name": "посёлок городского типа Гирей", "oktmo": "3613154051", "population": 6363.0, "lat": 45.40526728900005, "lon": 40.66420188000006, "trips": null, "population_source": "тип"}, {"name": "пгт Мостовской", "full_name": "поселок городского типа Мостовской", "oktmo": "3633151051", "population": 24975.0, "lat": 44.41436103900003, "lon": 40.79028228300007, "trips": null, "population_source": "тип"}, {"name": "пгт Нефтегорск", "full_name": "посёлок городского типа Нефтегорск", "oktmo": "3605157051", "population": 4968.0, "lat": 44.35368171900006, "lon": 39.70427949100008, "trips": null, "population_source": "тип"}, {"name": "пгт Псебай", "full_name": "посёлок городского типа Псебай", "oktmo": "3633156051", "population": 10533.0, "lat": 44.11608088900005, "lon": 40.79860060900006, "trips": null, "population_source": "тип"}, {"name": "с Архипо-Осиповка", "full_name": "село Архипо-Осиповка", "oktmo": "3708000111", "population": 6100.0, "lat": 44.37010358300006, "lon": 38.53339777500003, "trips": null, "population_source": "тип"}, {"name": "с Белая Глина", "full_name": "село Белая Глина", "oktmo": "3607402101", "population": 17800.0, "lat": 46.07366965800003, "lon": 40.87133077800007, "trips": null, "population_source": "тип"}, {"name": "с Беноково", "full_name": "село Беноково", "oktmo": "3633410101", "population": 1900.0, "lat": 44.41960851600004, "lon": 40.67768482700006, "trips": null, "population_source": "тип"}, {"name": "с Благодарное", "full_name": "село Благодарное", "oktmo": "3637402101", "population": 1700.0, "lat": 44.49693674400004, "lon": 41.54330945200007, "trips": null, "population_source": "тип"}, {"name": "с Варнавинское", "full_name": "село Варнавинское", "oktmo": "3601401101", "population": 1200.0, "lat": 44.99364646300006, "lon": 38.19529810200004, "trips": null, "population_source": "тип"}, {"name": "с Витязево", "full_name": "село Витязево", "oktmo": "3501000114", "population": 7936.0, "lat": 45.00235891800003, "lon": 37.28380788400005, "trips": null, "population_source": "тип"}, {"name": "с Гай-Кодзор", "full_name": "село Гай-Кодзор", "oktmo": "3501000116", "population": 3662.0, "lat": 44.85440078900007, "lon": 37.43774288300006, "trips": null, "population_source": "тип"}, {"name": "с Георгиевское", "full_name": "село Георгиевское", "oktmo": "3555000112", "population": 1606.0, "lat": 44.16281726900007, "lon": 39.25423287900004, "trips": null, "population_source": "тип"}, {"name": "с Кирилловка", "full_name": "село Кирилловка", "oktmo": "3720000161", "population": 1350.0, "lat": 44.76802107300006, "lon": 37.72647601800004, "trips": null, "population_source": "тип"}, {"name": "с Михайловское", "full_name": "село Михайловское", "oktmo": "3643408101", "population": 1700.0, "lat": 45.00856210200004, "lon": 38.50346550100005, "trips": null, "population_source": "тип"}, {"name": "с Навагинское", "full_name": "село Навагинское", "oktmo": "3555000137", "population": 270.0, "lat": 44.36695263900003, "lon": 39.33808004900004, "trips": null, "population_source": "тип"}, {"name": "с Пластунка", "full_name": "село Пластунка", "oktmo": "3726000406", "population": 2498.0, "lat": 43.68249091300004, "lon": 39.76101148600003, "trips": null, "population_source": "тип"}, {"name": "с Русское", "full_name": "село Русское", "oktmo": "3625419176", "population": 500.0, "lat": 44.95988398200006, "lon": 37.84022238200003, "trips": null, "population_source": "тип"}, {"name": "с Суворовское", "full_name": "село Суворовское", "oktmo": "3657431101", "population": 2704.0, "lat": 45.27711642700007, "lon": 39.43476673700007, "trips": null, "population_source": "тип"}, {"name": "с Супсех", "full_name": "село Супсех", "oktmo": "3501000143", "population": 8744.0, "lat": 44.86078796100004, "lon": 37.35824208700006, "trips": null, "population_source": "тип"}, {"name": "с Цибанобалка", "full_name": "село Цибанобалка", "oktmo": "3501000148", "population": 5452.0, "lat": 44.97839009300003, "lon": 37.33374878700005, "trips": null, "population_source": "тип"}, {"name": "с Цыпка", "full_name": "село Цыпка", "oktmo": "3555000157", "population": 750.0, "lat": 44.15759902100007, "lon": 39.17782301500006, "trips": null, "population_source": "тип"}, {"name": "ст-ца Анапская", "full_name": "станица Анапская", "oktmo": "3501000102", "population": 18978.0, "lat": 44.90034478800004, "lon": 37.38129201900006, "trips": null, "population_source": "тип"}, {"name": "ст-ца Анастасиевская", "full_name": "станица Анастасиевская", "oktmo": "3645402101", "population": 11000.0, "lat": 45.21563244800006, "lon": 37.89477346700005, "trips": null, "population_source": "тип"}, {"name": "ст-ца Брюховецкая", "full_name": "станица Брюховецкая", "oktmo": "3610407101", "population": 22000.0, "lat": 45.80200034200004, "lon": 38.99729355100004, "trips": null, "population_source": "тип"}, {"name": "ст-ца Выселки", "full_name": "станица Выселки", "oktmo": "3612413101", "population": 20798.0, "lat": 45.58004261500002, "lon": 39.65541559200005, "trips": null, "population_source": "тип"}, {"name": "ст-ца Динская", "full_name": "станица Динская", "oktmo": "3614404101", "population": 34100.0, "lat": 45.21857886800007, "lon": 39.22307091900007, "trips": null, "population_source": "тип"}, {"name": "ст-ца Ивановская", "full_name": "станица Ивановская", "oktmo": "3623407101", "population": 9643.0, "lat": 45.26941880800007, "lon": 38.46520720400008, "trips": null, "population_source": "тип"}, {"name": "ст-ца Кабардинская", "full_name": "станица Кабардинская", "oktmo": "3605407101", "population": 2300.0, "lat": 44.49518901900007, "lon": 39.49356168700007, "trips": null, "population_source": "тип"}, {"name": "ст-ца Кущевская", "full_name": "станица Кущёвская", "oktmo": "3628416101", "population": 23000.0, "lat": 46.55695526900007, "lon": 39.62210489300004, "trips": null, "population_source": "тип"}, {"name": "ст-ца Ленинградская", "full_name": "станица Ленинградская", "oktmo": "3532000101", "population": 38200.0, "lat": 46.32055133800003, "lon": 39.39288827000007, "trips": null, "population_source": "тип"}, {"name": "ст-ца Марьянская", "full_name": "станица Марьянская", "oktmo": "3623412101", "population": 11169.0, "lat": 45.09899384400006, "lon": 38.63621326100008, "trips": null, "population_source": "тип"}, {"name": "ст-ца Натухаевская", "full_name": "станица Натухаевская", "oktmo": "3720000181", "population": 6922.0, "lat": 44.91214149500007, "lon": 37.56959004000004, "trips": null, "population_source": "тип"}, {"name": "ст-ца Нижнебаканская", "full_name": "станица Нижнебаканская", "oktmo": "3625412101", "population": 8500.0, "lat": 44.86654839000005, "lon": 37.86664981600006, "trips": null, "population_source": "тип"}, {"name": "ст-ца Новоджерелиевская", "full_name": "станица Новоджерелиевская", "oktmo": "3610410101", "population": 5300.0, "lat": 45.77449500100005, "lon": 38.67127694100003, "trips": null, "population_source": "тип"}, {"name": "ст-ца Новомалороссийская", "full_name": "станица Новомалороссийская", "oktmo": "3612425101", "population": 7000.0, "lat": 45.63789995500008, "lon": 39.89716465300006, "trips": null, "population_source": "тип"}, {"name": "ст-ца Отрадная", "full_name": "ст-ца Отрадная", "oktmo": "3637413101", "population": null, "lat": null, "lon": null, "trips": null, "population_source": "неоднозначно"}, {"name": "ст-ца Павловская", "full_name": "станица Павловская", "oktmo": "3639428101", "population": 30700.0, "lat": 46.13053995300004, "lon": 39.79096826700004, "trips": null, "population_source": "тип"}, {"name": "ст-ца Полтавская", "full_name": "станица Полтавская", "oktmo": "3623410101", "population": 26365.0, "lat": 45.36680348900006, "lon": 38.21147221500007, "trips": null, "population_source": "тип"}, {"name": "ст-ца Роговская", "full_name": "станица Роговская", "oktmo": "3653428101", "population": 8300.0, "lat": 45.73294802200007, "lon": 38.73495704000004, "trips": null, "population_source": "тип"}, {"name": "ст-ца Саратовская", "full_name": "станица Саратовская", "oktmo": "3504000122", "population": 6000.0, "lat": 44.70714949700005, "lon": 39.23014915400007, "trips": null, "population_source": "тип"}, {"name": "ст-ца Советская", "full_name": "станица Советская", "oktmo": "3634431101", "population": 10000.0, "lat": 44.78305776300004, "lon": 41.17025237200005, "trips": null, "population_source": "тип"}, {"name": "ст-ца Старотитаровская", "full_name": "станица Старотитаровская", "oktmo": "3651422101", "population": 12200.0, "lat": 45.22469757500005, "lon": 37.15951473800004, "trips": null, "population_source": "тип"}, {"name": "ст-ца Тамань", "full_name": "станица Тамань", "oktmo": "3651425101", "population": 11672.0, "lat": 45.21561150200006, "lon": 36.71841685900006, "trips": null, "population_source": "тип"}, {"name": "ст-ца Тбилисская", "full_name": "станица Тбилисская", "oktmo": "3649419101", "population": 24100.0, "lat": 45.36452813900007, "lon": 40.20177066900004, "trips": null, "population_source": "тип"}, {"name": "ст-ца Холмская", "full_name": "станица Холмская", "oktmo": "3601408101", "population": 17300.0, "lat": 44.84804441800003, "lon": 38.38923227100003, "trips": null, "population_source": "тип"}, {"name": "ст-ца Шкуринская", "full_name": "станица Шкуринская", "oktmo": "3628431101", "population": 4900.0, "lat": 46.58205118800004, "lon": 39.36484285400007, "trips": null, "population_source": "тип"}, {"name": "х Бараниковский", "full_name": "хутор Бараниковский", "oktmo": "3645416101", "population": 2700.0, "lat": 45.33951188000003, "lon": 38.01787851000007, "trips": null, "population_source": "тип"}, {"name": "х Веселый", "full_name": "х Веселый", "oktmo": "3633151106", "population": null, "lat": null, "lon": null, "trips": null, "population_source": "неоднозначно"}, {"name": "х Даманка", "full_name": "хутор Даманка", "oktmo": "3625419121", "population": 850.0, "lat": 44.97066324300005, "lon": 37.78885612500004, "trips": null, "population_source": "тип"}, {"name": "х Калинина", "full_name": "х Калинина", "oktmo": "3605410121", "population": null, "lat": null, "lon": null, "trips": null, "population_source": "неоднозначно"}, {"name": "х Киновия", "full_name": "хутор Киновия", "oktmo": "3610422106", "population": 360.0, "lat": 45.90786766900004, "lon": 38.93018916900007, "trips": null, "population_source": "тип"}, {"name": "х Новоукраинский", "full_name": "хутор Новоукраинский", "oktmo": "3625413101", "population": 3500.0, "lat": 44.89401012400003, "lon": 38.04481460000004, "trips": null, "population_source": "тип"}, {"name": "х Павловский", "full_name": "хутор Павловский", "oktmo": "3625407101", "population": 1000.0, "lat": 45.07394173500006, "lon": 37.77261729300005, "trips": null, "population_source": "тип"}, {"name": "х Победа", "full_name": "х Победа", "oktmo": "3720000186", "population": null, "lat": null, "lon": null, "trips": null, "population_source": "неоднозначно"}, {"name": "х Терзиян", "full_name": "хутор Терзиян", "oktmo": "3555000154", "population": 290.0, "lat": 44.21072570000007, "lon": 39.42795988500006, "trips": null, "population_source": "тип"}, {"name": "х Упорный", "full_name": "хутор Упорный", "oktmo": "3639440101", "population": 1100.0, "lat": 46.14542244900008, "lon": 39.98312758300005, "trips": null, "population_source": "тип"}], "stats": {"total": 107, "with_trips": 30, "without_trips": 77, "without_coords": 5, "without_population": 5, "trips_min": 4.457281357301556, "trips_max": 773.6825595984943, "trips_median": 29.48633161494383, "pop_min": 270.0, "pop_max": 918145.0, "no_coords_names": ["п им М. Горького", "ст-ца Отрадная", "х Веселый", "х Калинина", "х Победа"]}};</script>
+    <script>
+      function readConfig() {
+        const el = document.getElementById("llmaps-config");
+        if (!el) throw new Error("LLMaps config element not found");
+        try {
+          return JSON.parse(el.textContent || "{}");
+        } catch (err) {
+          console.error("Failed to parse LLMaps config JSON", err);
+          return {};
+        }
+      }
+
+      function buildBaseStyle(center, zoom, tiles) {
+        const urlTemplate = (tiles.url_template || "").replace(
+          "{s}",
+          (tiles.subdomains && tiles.subdomains[0]) || "a"
+        );
+        return {
+          version: 8,
+          sources: {
+            "llmaps-base": {
+              type: "raster",
+              tiles: [urlTemplate],
+              tileSize: 256,
+              attribution: tiles.attribution || ""
+            }
+          },
+          layers: [
+            { id: "llmaps-base", type: "raster", source: "llmaps-base" }
+          ]
+        };
+      }
+
+      async function decompressData(compressedBase64) {
+        if (!compressedBase64) return null;
+        if (typeof compressedBase64 !== "string") return compressedBase64;
+        try {
+          const binaryString = atob(compressedBase64);
+          const len = binaryString.length;
+          const bytes = new Uint8Array(len);
+          for (let i = 0; i < len; i++) bytes[i] = binaryString.charCodeAt(i);
+          const decompressedBytes = pako.inflate(bytes);
+          const geobufAvailable = typeof geobuf !== "undefined" && typeof geobuf.decode === "function" && typeof Pbf !== "undefined";
+          const firstByte = decompressedBytes[0];
+          const isLikelyJSON = firstByte === 0x7B || firstByte === 0x5B;
+          if (geobufAvailable && !isLikelyJSON) {
+            try {
+              const pbf = new Pbf(decompressedBytes);
+              return geobuf.decode(pbf);
+            } catch (e) {
+              const jsonString = new TextDecoder("utf-8").decode(decompressedBytes);
+              return JSON.parse(jsonString);
+            }
+          }
+          const jsonString = new TextDecoder("utf-8").decode(decompressedBytes);
+          return JSON.parse(jsonString);
+        } catch (error) {
+          console.error("LLMaps decompression error:", error);
+          throw error;
+        }
+      }
+      function explodeMultiPoint(geojson, callback) {
+        if (!geojson || !geojson.features || !geojson.features.length) {
+          callback(geojson || { type: "FeatureCollection", features: [] });
+          return;
+        }
+        const features = [];
+        let processed = 0;
+        const total = geojson.features.length;
+        const chunkSize = 100;
+        function processChunk() {
+          const end = Math.min(processed + chunkSize, total);
+          for (let i = processed; i < end; i++) {
+            const feature = geojson.features[i];
+            if (feature.geometry && feature.geometry.type === "MultiPoint") {
+              feature.geometry.coordinates.forEach(coord => {
+                features.push({
+                  type: "Feature",
+                  geometry: { type: "Point", coordinates: coord },
+                  properties: feature.properties || {}
+                });
+              });
+            } else {
+              features.push(feature);
+            }
+          }
+          processed = end;
+          if (processed < total) setTimeout(processChunk, 0);
+          else callback({ type: "FeatureCollection", features });
+        }
+        processChunk();
+      }
+
+      async function getGeoJsonSource(config, sourceId, embeddedSources) {
+        const src = config.sources && config.sources[sourceId];
+        if (!src) return null;
+        if (embeddedSources && embeddedSources[sourceId] !== undefined) {
+          let data = embeddedSources[sourceId];
+          if (typeof data === "string") {
+            if (typeof decompressData === "function") data = await decompressData(data);
+            else return null;
+          }
+          if (data && data.features && typeof explodeMultiPoint === "function" &&
+              data.features.some(f => f.geometry && f.geometry.type === "MultiPoint"))
+            data = await new Promise(r => explodeMultiPoint(data, r));
+          return data ? { type: "geojson", data } : null;
+        }
+        if (src.type === "api") {
+          const url = new URL(src.url);
+          if (src.params)
+            Object.entries(src.params).forEach(([k, v]) => url.searchParams.set(k, v));
+          const res = await fetch(url.toString(), { headers: src.headers || {} });
+          let data = await res.json();
+          if (data && data.features && typeof explodeMultiPoint === "function" &&
+              data.features.some(f => f.geometry && f.geometry.type === "MultiPoint"))
+            data = await new Promise(r => explodeMultiPoint(data, r));
+          return { type: "geojson", data };
+        }
+        if (src.type === "file" && src.path) {
+          try {
+            const res = await fetch(src.path);
+            let data = await res.json();
+            if (data && data.features && typeof explodeMultiPoint === "function" &&
+                data.features.some(f => f.geometry && f.geometry.type === "MultiPoint"))
+              data = await new Promise(r => explodeMultiPoint(data, r));
+            return { type: "geojson", data };
+          } catch (e) {
+            console.warn("Could not load file source " + sourceId + ": " + e.message);
+            return null;
+          }
+        }
+        return null;
+      }
+
+      // Feature state utilities (require promoteId on the source)
+      window.llmapsClearFeatureStates = function(sourceId) {
+        const map = window.llmaps_map;
+        if (!map || !map.getSource(sourceId)) return;
+        map.removeFeatureState({ source: sourceId });
+      };
+      window.llmapsSetFeatureState = function(sourceId, featureId, state) {
+        const map = window.llmaps_map;
+        if (!map || !map.getSource(sourceId)) return;
+        map.setFeatureState({ source: sourceId, id: featureId }, state);
+      };
+
+      // Feature-state animation utilities (single shared RAF loop)
+      window._llmapsFeatureStateAnims = window._llmapsFeatureStateAnims || {};
+      window._llmapsFeatureStateAnimRaf = window._llmapsFeatureStateAnimRaf || null;
+
+      function _llmapsAnimKey(sourceId, featureId, sourceLayer) {
+        return String(sourceId) + "::" + String(sourceLayer || "") + "::" + String(featureId);
+      }
+
+      function _llmapsAnimEase(name, t) {
+        if (name === "linear") return t;
+        // default: easeInOutSine
+        return -(Math.cos(Math.PI * t) - 1) / 2;
+      }
+
+      function _llmapsRunFeatureStateAnimLoop(ts) {
+        var map = window.llmaps_map;
+        var store = window._llmapsFeatureStateAnims || {};
+        var keys = Object.keys(store);
+        if (!map || keys.length === 0) {
+          window._llmapsFeatureStateAnimRaf = null;
+          return;
+        }
+
+        for (var i = 0; i < keys.length; i++) {
+          var key = keys[i];
+          var anim = store[key];
+          if (!anim) continue;
+          if (!map.getSource(anim.sourceId)) {
+            delete store[key];
+            continue;
+          }
+
+          var elapsed = Math.max(0, ts - anim.startTs);
+          var progress = anim.duration <= 0 ? 1 : Math.min(1, elapsed / anim.duration);
+          var eased = _llmapsAnimEase(anim.easing, progress);
+          var frameState = {};
+
+          for (var sKey in anim.targetState) {
+            if (!Object.prototype.hasOwnProperty.call(anim.targetState, sKey)) continue;
+            var targetVal = anim.targetState[sKey];
+            var startVal = anim.startState[sKey];
+            if (typeof targetVal === "number" && typeof startVal === "number" && isFinite(targetVal) && isFinite(startVal)) {
+              frameState[sKey] = startVal + (targetVal - startVal) * eased;
+            } else {
+              frameState[sKey] = targetVal;
+            }
+          }
+
+          // For fade-out patterns keep active=true during transition
+          if (
+            Object.prototype.hasOwnProperty.call(anim.targetState, "active") &&
+            anim.targetState.active === false &&
+            typeof anim.targetState.fade_mix === "number" &&
+            progress < 1
+          ) {
+            frameState.active = true;
+          }
+
+          var featureSelector = { source: anim.sourceId, id: anim.featureId };
+          if (anim.sourceLayer) featureSelector.sourceLayer = anim.sourceLayer;
+          try {
+            map.setFeatureState(featureSelector, frameState);
+          } catch (e) {
+            delete store[key];
+            continue;
+          }
+
+          if (progress >= 1) {
+            try {
+              map.setFeatureState(featureSelector, anim.targetState);
+            } catch (e2) {}
+            delete store[key];
+          }
+        }
+
+        if (Object.keys(store).length > 0) {
+          window._llmapsFeatureStateAnimRaf = requestAnimationFrame(_llmapsRunFeatureStateAnimLoop);
+        } else {
+          window._llmapsFeatureStateAnimRaf = null;
+        }
+      }
+
+      /**
+       * Animate feature-state for one feature.
+       *
+       * @param {string} sourceId
+       * @param {string|number} featureId
+       * @param {Object} targetState - final state object
+       * @param {Object} options - { duration?: number, easing?: "linear"|"easeInOutSine", sourceLayer?: string }
+       */
+      window.llmapsAnimateFeatureState = function(sourceId, featureId, targetState, options) {
+        var map = window.llmaps_map;
+        if (!map || !map.getSource(sourceId)) return;
+        if (featureId == null || !targetState || typeof targetState !== "object") return;
+
+        var opts = options || {};
+        var duration = Number(opts.duration);
+        if (!isFinite(duration) || duration < 0) duration = 220;
+        var easing = (opts.easing === "linear" || opts.easing === "easeInOutSine") ? opts.easing : "easeInOutSine";
+        var sourceLayer = opts.sourceLayer || null;
+
+        var featureSelector = { source: sourceId, id: featureId };
+        if (sourceLayer) featureSelector.sourceLayer = sourceLayer;
+        var startStateRaw = {};
+        try {
+          startStateRaw = map.getFeatureState(featureSelector) || {};
+        } catch (e) {
+          startStateRaw = {};
+        }
+
+        var startState = {};
+        for (var sKey in targetState) {
+          if (!Object.prototype.hasOwnProperty.call(targetState, sKey)) continue;
+          var targetVal = targetState[sKey];
+          var currentVal = startStateRaw[sKey];
+          if (typeof targetVal === "number" && isFinite(targetVal)) {
+            if (typeof currentVal === "number" && isFinite(currentVal)) {
+              startState[sKey] = currentVal;
+            } else if (sKey === "fade_mix" && typeof startStateRaw.active === "boolean") {
+              startState[sKey] = startStateRaw.active ? 1 : 0;
+            } else {
+              startState[sKey] = targetVal;
+            }
+          } else {
+            startState[sKey] = currentVal;
+          }
+        }
+
+        if (duration <= 0) {
+          map.setFeatureState(featureSelector, targetState);
+          return;
+        }
+
+        var animKey = _llmapsAnimKey(sourceId, featureId, sourceLayer);
+        window._llmapsFeatureStateAnims[animKey] = {
+          sourceId: sourceId,
+          sourceLayer: sourceLayer,
+          featureId: featureId,
+          startTs: performance.now(),
+          duration: duration,
+          easing: easing,
+          startState: startState,
+          targetState: targetState
+        };
+
+        if (window._llmapsFeatureStateAnimRaf == null) {
+          window._llmapsFeatureStateAnimRaf = requestAnimationFrame(_llmapsRunFeatureStateAnimLoop);
+        }
+      };
+
+      /**
+       * Public utility: retrieve GeoJSON data for a source.
+       * Works with embedded (+ compressed) and remote sources.
+       * Returns a Promise resolving to a GeoJSON object or null.
+       *
+       * Usage: const data = await window.llmapsGetSourceData("my-source");
+       */
+      window.llmapsGetSourceData = function(sourceId) {
+        const config = readConfig();
+        const embedded = config.embedded_sources || {};
+        return getGeoJsonSource(config, sourceId, embedded).then(function(geo) {
+          return geo && geo.data ? geo.data : null;
+        });
+      };
+
+      // Store parsed GeoJSON data per source for feature-state binding
+      window._llmapsSourceGeoJson = window._llmapsSourceGeoJson || {};
+
+      function addSourceFromConfig(map, config, sourceId, embeddedSources) {
+        const src = config.sources && config.sources[sourceId];
+        if (!src || map.getSource(sourceId)) return Promise.resolve();
+        if (src.type === "vector") {
+          try {
+            const vectorOpts = { type: "vector", tiles: src.tiles || [src.tiles_url] };
+            if (src.promoteId) vectorOpts.promoteId = src.promoteId;
+            map.addSource(sourceId, vectorOpts);
+          } catch (e) {
+            if (e.message && e.message.includes("already exists")) {
+              console.warn(`Source ${sourceId} already exists, skipping`);
+              return Promise.resolve();
+            }
+            throw e;
+          }
+          return Promise.resolve();
+        }
+        return getGeoJsonSource(config, sourceId, embeddedSources).then(geo => {
+          if (geo) {
+            if (src.promoteId) geo.promoteId = src.promoteId;
+            // Keep a reference to parsed GeoJSON for feature-state binding
+            if (geo.data) window._llmapsSourceGeoJson[sourceId] = geo.data;
+            try {
+              map.addSource(sourceId, geo);
+            } catch (e) {
+              if (e.message && e.message.includes("already exists")) {
+                console.warn(`Source ${sourceId} already exists, skipping`);
+                return;
+              }
+              throw e;
+            }
+          }
+        });
+      }
+
+      function initVisibilityOptimization(maps, sourceIds) {}
+
+      function loadLayers(map, config, embeddedSources, layerIdsFilter) {
+        const layers = config.layers || [];
+        const sourceIds = new Set(layers.map(l => l.source));
+        const embedded = config.embedded_sources || embeddedSources || {};
+        return Promise.all(
+          Array.from(sourceIds).map(id =>
+            addSourceFromConfig(map, config, id, embedded)
+          )
+        ).then(() => {
+          layers.forEach(l => addLayerFromConfig(map, l, layerIdsFilter));
+        });
+      }
+
+      function addLayerFromConfig(map, layerConfig, layerIdsToAdd) {
+        if (layerIdsToAdd && !layerIdsToAdd.includes(layerConfig.id)) return;
+        if (map.getLayer(layerConfig.id)) return;
+        const layer = {
+          id: layerConfig.id,
+          type: layerConfig.type || "circle",
+          source: layerConfig.source,
+          paint: layerConfig.paint || {},
+          layout: layerConfig.layout || {}
+        };
+        if (layerConfig["source-layer"] != null)
+          layer["source-layer"] = layerConfig["source-layer"];
+        if (layerConfig.visible === false) {
+          layer.layout.visibility = "none";
+        }
+        if (layerConfig.minzoom != null) layer.minzoom = layerConfig.minzoom;
+        if (layerConfig.maxzoom != null) layer.maxzoom = layerConfig.maxzoom;
+        if (layerConfig.filter != null) layer.filter = layerConfig.filter;
+        map.addLayer(layer);
+      }
+
+      // Event queue for llmapsOnLayersReady callbacks
+      window._llmapsReadyCallbacks = window._llmapsReadyCallbacks || [];
+      window._llmapsLayersReady = false;
+      window._llmapsReadyMap = null;
+      window.llmapsOnLayersReady = function(fn) {
+        if (typeof fn === 'function') {
+          window._llmapsReadyCallbacks.push(fn);
+          // If layers already loaded, call immediately
+          if (window._llmapsLayersReady && window._llmapsReadyMap) {
+            fn(window._llmapsReadyMap);
+          }
+        }
+      };
+
+      /**
+       * Apply feature-state bindings declared in layer configs.
+       * For each layer with a ``featureState`` dict, iterates over the
+       * source GeoJSON features and calls ``map.setFeatureState``.
+       *
+       * String values in the dict are treated as GeoJSON property names;
+       * all other values (bool, number) are used as constants.
+       */
+      function applyFeatureStates(map, config) {
+        var layers = config.layers || [];
+        var sources = config.sources || {};
+        layers.forEach(function(lc) {
+          if (!lc.featureState) return;
+          var sourceId = lc.source;
+          var srcConfig = sources[sourceId];
+          var promoteId = srcConfig && srcConfig.promoteId;
+          var geojson = window._llmapsSourceGeoJson && window._llmapsSourceGeoJson[sourceId];
+          if (!geojson || !geojson.features) {
+            console.warn("applyFeatureStates: no GeoJSON data for source '" + sourceId + "'");
+            return;
+          }
+          var bindings = lc.featureState;
+          var count = 0;
+          geojson.features.forEach(function(f) {
+            var id = promoteId ? f.properties[promoteId] : f.id;
+            if (id == null) return;
+            var state = {};
+            for (var key in bindings) {
+              var val = bindings[key];
+              state[key] = (typeof val === "string") ? f.properties[val] : val;
+            }
+            map.setFeatureState({ source: sourceId, id: id }, state);
+            count++;
+          });
+          console.log("Feature states set for " + count + " features in source '" + sourceId + "'");
+        });
+      }
+
+      function parseMapHash(hashValue) {
+        if (!hashValue) return null;
+        const raw = hashValue.charAt(0) === "#" ? hashValue.slice(1) : hashValue;
+        const parts = raw.split("/");
+        if (parts.length !== 3) return null;
+
+        const zoom = Number(parts[0]);
+        const lat = Number(parts[1]);
+        const lon = Number(parts[2]);
+        const valid = [zoom, lat, lon].every(Number.isFinite)
+          && lat >= -90 && lat <= 90
+          && lon >= -180 && lon <= 180
+          && zoom >= 0 && zoom <= 24;
+
+        if (!valid) return null;
+        return { center: [lon, lat], zoom: zoom };
+      }
+
+      function formatMapHash(map) {
+        const center = map.getCenter();
+        const zoom = map.getZoom();
+        return zoom.toFixed(2) + "/" + center.lat.toFixed(5) + "/" + center.lng.toFixed(5);
+      }
+
+      function updateLocationHash(hashValue) {
+        const nextHash = "#" + hashValue;
+        if (window.location.hash === nextHash) return;
+        const base = window.location.pathname + window.location.search;
+        if (window.history && typeof window.history.replaceState === "function") {
+          window.history.replaceState(null, "", base + nextHash);
+        } else {
+          window.location.hash = hashValue;
+        }
+      }
+
+      function enableMapHashSync(map) {
+        if (!map || map._llmapsHashSyncEnabled) return;
+        map._llmapsHashSyncEnabled = true;
+
+        const sync = function() {
+          updateLocationHash(formatMapHash(map));
+        };
+
+        map.on("load", sync);
+        map.on("moveend", sync);
+      }
+
+      function isHashPositionEnabled(config) {
+        if (typeof config.hash_position === "boolean") return config.hash_position;
+        const controls = (config.components || []).find(function(c) { return c.type === "controls"; });
+        if (controls && typeof controls.hash === "boolean") return controls.hash;
+        return false;
+      }
+
+      function createSingleMap(containerId, config, layerIdsFilter, embeddedSources, options) {
+        const useHash = !!(options && options.hashSync);
+        const hashState = useHash ? parseMapHash(window.location.hash) : null;
+        const center = (hashState && hashState.center) || config.center || [0, 0];
+        const zoom = (hashState && hashState.zoom) ?? (config.zoom ?? 10);
+        const tiles = config.tiles || {};
+        const styleUrl = (config && config.style_url) || null;
+
+        const mapOptions = {
+          container: containerId,
+          center: center,
+          zoom: zoom,
+          attributionControl: false
+        };
+
+        // If an explicit external style is provided in the config
+        // (e.g. Lightberry from WB Maps), use it directly.
+        // Otherwise, build a basic raster style.
+        if (styleUrl) {
+          mapOptions.style = styleUrl;
+        } else {
+          mapOptions.style = buildBaseStyle(center, zoom, tiles);
+        }
+
+        const map = new maplibregl.Map(mapOptions);
+
+        // Single attribution control: style/sources + custom LLMaps label.
+        if (typeof maplibregl.AttributionControl === "function") {
+          const customAttr = config.custom_attribution || '© LLMaps';
+          map.addControl(new maplibregl.AttributionControl({
+            customAttribution: customAttr
+          }), "bottom-right");
+        }
+        if (useHash) enableMapHashSync(map);
+
+        const layers = config.layers || [];
+        const embedded = config.embedded_sources || embeddedSources || {};
+
+        map._loadLayers = () => {
+          if (map._layersLoading) {
+            console.warn('Layers are already loading, skipping duplicate call');
+            return Promise.resolve();
+          }
+          map._layersLoading = true;
+          return loadLayers(map, config, embedded, layerIdsFilter).then(() => {
+            applyFeatureStates(map, config);
+            map._layersLoading = false;
+            window._llmapsLayersReady = true;
+            window._llmapsReadyMap = map;
+            window._llmapsReadyCallbacks.forEach(fn => fn(map));
+          }).catch(err => {
+            map._layersLoading = false;
+            throw err;
+          });
+        };
+
+        map.on("load", function() {
+          map._loadLayers().then(() => {
+            map._layersLoaded = true;
+          });
+        });
+
+        return map;
+      }
+
+      /**
+       * Safely destroy a map instance and release its WebGL context.
+       * Call before removing the map container from DOM when using lazy_init
+       * or when evicting due to max_active_maps. Idempotent if map already removed.
+       */
+      function destroySingleMap(map) {
+        if (!map) return;
+        try {
+          if (typeof map.remove === "function") map.remove();
+        } catch (e) {
+          if (typeof console !== "undefined" && console.warn) console.warn("LLMaps: destroySingleMap", e);
+        }
+        map._layersLoaded = false;
+        map._layersLoading = false;
+        if (window._llmapsReadyMap === map) {
+          window._llmapsReadyMap = null;
+          window._llmapsLayersReady = false;
+        }
+        if (window.llmaps_maps && Array.isArray(window.llmaps_maps)) {
+          window.llmaps_maps = window.llmaps_maps.filter(function(m) { return m !== map; });
+        }
+        if (window.llmaps_map === map) window.llmaps_map = null;
+      }
+
+      function setupComparison(root, config) {
+        const comp = config.comparison;
+        const leftIds = comp.left_layers || [];
+        const rightIds = comp.right_layers || [];
+        root.id = "llmaps-comparison-container";
+        root.innerHTML = [
+          '<div id="llmaps-compare-before" class="llmaps-compare-map"></div>',
+          '<div id="llmaps-compare-after" class="llmaps-compare-map"></div>'
+        ].join("");
+
+        const embedded = config.embedded_sources || {};
+        const allConfigLayerIds = (config.layers || []).map(function(l) { return l.id; });
+        function withOutlineLayers(ids) {
+          var result = ids.slice();
+          ids.forEach(function(id) {
+            if (allConfigLayerIds.indexOf(id + "-outline") !== -1) result.push(id + "-outline");
+          });
+          return result;
+        }
+        const hashSyncEnabled = isHashPositionEnabled(config);
+        const beforeMap = createSingleMap(
+          "llmaps-compare-before",
+          config,
+          withOutlineLayers(leftIds),
+          embedded,
+          { hashSync: false }
+        );
+        const afterMap = createSingleMap(
+          "llmaps-compare-after",
+          config,
+          withOutlineLayers(rightIds),
+          embedded,
+          { hashSync: false }
+        );
+
+        function enableComparisonHashSync(mapLeft, mapRight) {
+          if (!hashSyncEnabled) return;
+
+          var isSyncing = false;
+          function syncHashFrom(source) {
+            if (isSyncing) return;
+            isSyncing = true;
+            updateLocationHash(formatMapHash(source));
+            isSyncing = false;
+          }
+
+          var initialHash = parseMapHash(window.location.hash);
+          if (initialHash) {
+            mapLeft.jumpTo(initialHash);
+            mapRight.jumpTo(initialHash);
+          } else if (mapLeft && typeof mapLeft.getCenter === "function") {
+            updateLocationHash(formatMapHash(mapLeft));
+          }
+
+          mapLeft.on("moveend", function() { syncHashFrom(mapLeft); });
+          mapRight.on("moveend", function() { syncHashFrom(mapRight); });
+
+          window.addEventListener("hashchange", function() {
+            var hashState = parseMapHash(window.location.hash);
+            if (!hashState || isSyncing) return;
+            isSyncing = true;
+            mapLeft.jumpTo(hashState);
+            mapRight.jumpTo(hashState);
+            isSyncing = false;
+          });
+        }
+
+        if (typeof maplibregl.Compare !== "function") {
+          console.warn("maplibre-gl-compare not loaded; comparison uses basic sync only.");
+          beforeMap.on("moveend", function() {
+            afterMap.setCenter(beforeMap.getCenter());
+            afterMap.setZoom(beforeMap.getZoom());
+          });
+          afterMap.on("moveend", function() {
+            beforeMap.setCenter(afterMap.getCenter());
+            beforeMap.setZoom(afterMap.getZoom());
+          });
+          enableComparisonHashSync(beforeMap, afterMap);
+          return { mapLeft: beforeMap, mapRight: afterMap };
+        }
+
+        var compare = new maplibregl.Compare(beforeMap, afterMap, "#llmaps-comparison-container", {
+          mousemove: false,
+          orientation: "vertical"
+        });
+
+        enableComparisonHashSync(beforeMap, afterMap);
+        return { mapLeft: beforeMap, mapRight: afterMap };
+      }
+
+      function addComponents(config, mapOrMaps) {
+        const maps = Array.isArray(mapOrMaps) ? mapOrMaps : [mapOrMaps];
+        const map = maps[0];
+        const components = config.components || [];
+
+        // Get locale from config, default to en-US
+        const locale = config.locale || "en-US";
+        const normalizedLocale = String(locale).replace(/_/g, "-");
+
+        function formatValue(val, fieldName) {
+          if (val == null) return "";
+
+          // Special case: year field - never format with thousand separators
+          if (fieldName === 'year' && typeof val === 'number') {
+            return String(Math.round(val));
+          }
+
+          // If value is a number, format with locale-aware separators
+          if (typeof val === 'number') {
+            return val.toLocaleString(locale, {
+              maximumFractionDigits: 2
+            });
+          }
+
+          // If value is a string that looks like a number, parse and format it
+          if (typeof val === 'string') {
+            const trimmed = val.trim();
+            const parsed = Number(trimmed);
+
+            // Ensure parsing succeeded and the string is not empty
+            if (!isNaN(parsed) && trimmed !== '' && /^-?\d+\.?\d*$/.test(trimmed)) {
+              // Check if it's a year field or year-like value (4-digit integer 1900-2100)
+              if (fieldName === 'year' || (Number.isInteger(parsed) && parsed >= 1900 && parsed <= 2100 && trimmed.length === 4)) {
+                return String(Math.round(parsed));
+              }
+              return parsed.toLocaleString(locale, {
+                maximumFractionDigits: 2
+              });
+            }
+          }
+
+          // Otherwise return as string
+          return String(val);
+        }
+        components.forEach(c => {
+          if (c.type === "controls") {
+            if (c.zoom)
+              map.addControl(new maplibregl.NavigationControl(), "top-left");
+            if (c.scale && typeof maplibregl.ScaleControl === "function")
+              map.addControl(new maplibregl.ScaleControl(), "bottom-left");
+            if (c.fullscreen && maplibregl.FullscreenControl)
+              map.addControl(new maplibregl.FullscreenControl(), "top-left");
+          }
+        });
+
+        const basemapSwitcherConfig = components.find(c => c.type === "basemap_switcher");
+        const hasTileProviders = config.tile_providers && config.tile_providers.length > 0;
+
+        function tileUrl(tiles) {
+          const t = (tiles && tiles.url_template) || "";
+          return t.replace("{s}", (tiles.subdomains && tiles.subdomains[0]) || "a");
+        }
+        
+        // Make switchBasemap available globally for server-rendered legend
+        window.llmaps_switchBasemap = function(providerId) {
+          const provider = config.tile_providers.find(function(p) { return p.id === providerId; });
+          if (!provider) return;
+          const url = tileUrl(provider);
+          maps.forEach(function(m) {
+            if (!m.getLayer || !m.getSource) return;
+            if (m.getLayer("llmaps-base")) m.removeLayer("llmaps-base");
+            if (m.getSource("llmaps-base")) m.removeSource("llmaps-base");
+            m.addSource("llmaps-base", {
+              type: "raster",
+              tiles: [url],
+              tileSize: 256,
+              attribution: provider.attribution || ""
+            });
+            const layers = m.getStyle().layers;
+            const firstId = layers && layers[0] ? layers[0].id : undefined;
+            m.addLayer({ id: "llmaps-base", type: "raster", source: "llmaps-base" }, firstId);
+          });
+        };
+        
+        function createBasemapSelect(config, maps, currentId) {
+          const wrap = document.createElement("div");
+          wrap.className = "llmaps-basemap-select-wrap";
+          const select = document.createElement("select");
+          select.className = "llmaps-basemap-select";
+          config.tile_providers.forEach(function(provider) {
+            const opt = document.createElement("option");
+            opt.value = provider.id;
+            opt.textContent = provider.name || provider.id;
+            if (provider.id === currentId) opt.selected = true;
+            select.appendChild(opt);
+          });
+          select.addEventListener("change", function() {
+            window.llmaps_switchBasemap(select.value);
+          });
+          wrap.appendChild(select);
+          return wrap;
+        }
+
+        // Legend is now server-rendered, skip client-side generation
+
+        // Standalone basemap switcher (if not embedded in legend)
+        const legendConfig = components.find(c => c.type === "legend");
+        const basemapInLegend = legendConfig && hasTileProviders;
+
+        if (basemapSwitcherConfig && hasTileProviders && !basemapInLegend) {
+          const currentTiles = config.tiles || {};
+          const currentId = currentTiles.id || (config.tile_providers[0] && config.tile_providers[0].id);
+          const wrap = document.createElement("div");
+          wrap.className = "llmaps-basemap-switcher " + (basemapSwitcherConfig.position || "top-left");
+          wrap.style.position = "absolute";
+          wrap.style.zIndex = "10";
+          wrap.appendChild(createBasemapSelect(config, maps, currentId));
+          document.body.appendChild(wrap);
+        }
+
+        const popupConfig = components.find(c => c.type === "popup");
+        if (popupConfig && typeof maplibregl.Popup === "function") {
+          const defaultFields = popupConfig.fields || [];
+          const fieldLabels = popupConfig.field_labels || {};
+          const fieldsByLayer = popupConfig.fields_by_layer || {};
+          const popupTrigger = popupConfig.trigger || "click";
+          const layers = config.layers || [];
+
+          // Layers with sidebar: skip click popup (click opens sidebar), but allow hover popup
+          const _sidebarCfg = components.find(c => c.type === "sidebar");
+          const sidebarLayerIds = _sidebarCfg && _sidebarCfg.fields_by_layer
+            ? new Set(Object.keys(_sidebarCfg.fields_by_layer)) : new Set();
+
+          function popupContent(feature, layerId) {
+            const fields = fieldsByLayer[layerId] && fieldsByLayer[layerId].length
+              ? fieldsByLayer[layerId] : defaultFields;
+            const props = feature.properties || {};
+            if (!fields.length) return Object.keys(props).length ? JSON.stringify(props) : "";
+            const rows = fields.map(f => {
+              const label = fieldLabels[f] || f;
+              const val = props[f];
+              return "<tr><td>" + label + "</td><td>" + formatValue(val, f) + "</td></tr>";
+            });
+            return "<table style=\"font-size:12px;\">" + rows.join("") + "</table>";
+          }
+
+          function lngLat(feature) {
+            const g = feature.geometry;
+            if (!g || !g.coordinates) return null;
+            const c = g.coordinates;
+            if (g.type === "Point") return c;
+            if (g.type === "LineString" || g.type === "MultiPoint") return c[0];
+            if (g.type === "Polygon") return c[0][0];
+            if (g.type === "MultiLineString") return c[0][0];
+            if (g.type === "MultiPolygon") return c[0][0][0];
+            if (c[0] != null && typeof c[0] === "number") return c;
+            if (Array.isArray(c[0]) && c[0].length >= 2 && typeof c[0][0] === "number") return c[0];
+            return null;
+          }
+
+          function addPopupToMap(m) {
+            if (!m || !m.getLayer) return;
+
+            const hasFieldsByLayer = Object.keys(fieldsByLayer).length > 0;
+            if (popupTrigger === "hover") {
+              var hoverPopup = new maplibregl.Popup({ closeButton: false, closeOnClick: false });
+              layers.forEach(layerCfg => {
+                const layerId = layerCfg.id;
+                if (!m.getLayer(layerId)) return;
+                if (hasFieldsByLayer && !fieldsByLayer[layerId]) return;
+                m.on("mousemove", layerId, function(ev) {
+                  const feat = ev.features && ev.features[0];
+                  if (!feat) return;
+                  var html = popupContent(feat, layerId);
+                  if (!html) return;
+                  m.getCanvas().style.cursor = "pointer";
+                  hoverPopup.setLngLat(ev.lngLat).setHTML(html).addTo(m);
+                });
+                m.on("mouseleave", layerId, function() {
+                  m.getCanvas().style.cursor = "";
+                  hoverPopup.remove();
+                });
+              });
+            } else {
+              // Single map click + queryRenderedFeatures + layer type priority (points over polygons)
+              // When fields_by_layer is set, only layers listed there get popup (e.g. no popup on point layer)
+              const popupLayerIds = layers
+                .filter(function(l) {
+                  if (sidebarLayerIds.has(l.id) || !m.getLayer(l.id)) return false;
+                  if (hasFieldsByLayer && !fieldsByLayer[l.id]) return false;
+                  return true;
+                })
+                .map(function(l) { return l.id; });
+              const typePriority = { circle: 0, symbol: 1, line: 2, fill: 3 };
+              var currentPopup = null;
+              var selectedFeature = null;
+              var _prevHl = null; // { map, source, id }
+              function _hlClear() {
+                if (_prevHl) {
+                  _prevHl.map.removeFeatureState({ source: _prevHl.source, id: _prevHl.id }, 'selected');
+                  _prevHl = null;
+                }
+              }
+              function _hlEnsureLayer(m, sourceId, parentLayerType, sourceLayer) {
+                var hlId = 'llmaps-hl-' + sourceId;
+                if (m.getLayer(hlId)) return;
+                var isPoint = parentLayerType === 'circle' || parentLayerType === 'symbol';
+                var sel = ['boolean', ['feature-state', 'selected'], false];
+                var spec = isPoint
+                  ? { id: hlId, type: 'circle', source: sourceId,
+                      paint: { 'circle-radius': ['case', sel, 10, 0],
+                               'circle-color': 'transparent',
+                               'circle-stroke-color': '#111111',
+                               'circle-stroke-width': ['case', sel, 2.5, 0] } }
+                  : { id: hlId, type: 'line', source: sourceId,
+                      paint: { 'line-color': '#111111',
+                               'line-width': ['case', sel, 3.5, 0] } };
+                if (sourceLayer) spec['source-layer'] = sourceLayer;
+                m.addLayer(spec);
+              }
+              function _hlSet(m, feat) {
+                _hlClear();
+                if (!feat || feat.id == null) return;
+                var sourceId = feat.source;
+                _hlEnsureLayer(m, sourceId, feat.layer && feat.layer.type, feat.sourceLayer);
+                m.setFeatureState({ source: sourceId, id: feat.id }, { selected: true });
+                _prevHl = { map: m, source: sourceId, id: feat.id };
+              }
+              m.on("click", function(ev) {
+                if (currentPopup) {
+                  currentPopup.remove();
+                  currentPopup = null;
+                }
+                _hlSet(m, null);
+                selectedFeature = null;
+                if (!popupLayerIds.length) return;
+                var features = m.queryRenderedFeatures(ev.point, { layers: popupLayerIds });
+                if (!features.length) return;
+                features.sort(function(a, b) {
+                  var typeA = (m.getLayer(a.layer.id) && m.getLayer(a.layer.id).type) || "fill";
+                  var typeB = (m.getLayer(b.layer.id) && m.getLayer(b.layer.id).type) || "fill";
+                  return (typePriority[typeA] !== undefined ? typePriority[typeA] : 99) - (typePriority[typeB] !== undefined ? typePriority[typeB] : 99);
+                });
+                var feat = features[0];
+                var layerId = feat.layer.id;
+                _hlSet(m, feat);
+                selectedFeature = feat;
+                currentPopup = new maplibregl.Popup()
+                  .setLngLat(ev.lngLat)
+                  .setHTML(popupContent(feat, layerId))
+                  .addTo(m);
+                // Clear highlight when popup is closed manually
+                currentPopup.on('close', function() {
+                  _hlClear();
+                  currentPopup = null;
+                  selectedFeature = null;
+                });
+              });
+              m.getCanvas().style.cursor = "pointer";
+            }
+          }
+
+          window.llmapsOnLayersReady(function(m) {
+            addPopupToMap(m);
+          });
+          
+          // Export for external map instances (e.g., comparison maps created via custom JS)
+          window.llmapsAddPopupToMap = addPopupToMap;
+        }
+
+        // Sidebar
+        const sidebarConfig = components.find(c => c.type === "sidebar");
+        if (sidebarConfig) {
+          const sbWidth = sidebarConfig.width || 400;
+          const sbPosition = sidebarConfig.position || "right";
+          const sbFieldsByLayer = sidebarConfig.fields_by_layer || {};
+          const sbFieldLabels = sidebarConfig.field_labels || {};
+          const sbTitleField = sidebarConfig.title_field || null;
+          const sbTitleByLayer = sidebarConfig.title_by_layer || {};
+          const sbCloseOnMapClick = sidebarConfig.close_on_map_click !== false;
+          const sbZoomOnClick = sidebarConfig.zoom_on_click;
+          const sbHideEmptyFields = sidebarConfig.hide_empty_fields !== false;
+          const layers = config.layers || [];
+
+          // Create sidebar DOM
+          const sbEl = document.createElement("div");
+          sbEl.id = "llmaps-sidebar";
+          sbEl.className = "llmaps-sidebar " + sbPosition;
+          sbEl.style.setProperty("--llmaps-sidebar-width", sbWidth + "px");
+          document.body.appendChild(sbEl);
+
+          var sbIgnoreNextMapClick = false;
+
+          function sidebarOpen(layerId, feature) {
+            const props = feature.properties || {};
+            const fields = sbFieldsByLayer[layerId] || Object.keys(props);
+            const title = (sbTitleField && props[sbTitleField])
+              ? String(props[sbTitleField])
+              : (sbTitleByLayer[layerId] || "Feature info");
+
+            let html = '<div class="llmaps-sidebar-header">'
+              + '<h2 class="llmaps-sidebar-title">' + _sbEsc(title) + '</h2>'
+              + '<button class="llmaps-sidebar-close" title="Close">&times;</button>'
+              + '</div>'
+              + '<div class="llmaps-sidebar-content"><div class="llmaps-sidebar-section">';
+
+            fields.forEach(function(f) {
+              const label = sbFieldLabels[f] || f;
+              const val = props[f];
+              // Skip empty/null/whitespace-only values if enabled
+              if (sbHideEmptyFields) {
+                if (val == null) return;
+                if (typeof val === "string" && val.trim() === "") return;
+              }
+              var linkHtml = _sbLinkField(f, val);
+              var valueHtml = linkHtml !== false ? linkHtml : _sbEsc(formatValue(val, f));
+              html += '<div class="llmaps-sidebar-field">'
+                + '<span class="llmaps-sidebar-field-label">' + _sbEsc(label) + '</span>'
+                + '<span class="llmaps-sidebar-field-value">' + valueHtml + '</span>'
+                + '</div>';
+            });
+
+            html += '</div></div>';
+            sbEl.innerHTML = html;
+            sbEl.classList.add("open");
+
+            sbEl.querySelector(".llmaps-sidebar-close").addEventListener("click", sidebarClose);
+          }
+
+          function sidebarClose() {
+            sbEl.classList.remove("open");
+          }
+
+          function _sbEsc(str) {
+            var d = document.createElement("div");
+            d.textContent = str;
+            return d.innerHTML;
+          }
+
+          function _sbLinkField(fieldName, val) {
+            if (val == null || typeof val !== "string") return false;
+            var v = val.trim();
+            if (v.indexOf("http://") !== 0 && v.indexOf("https://") !== 0) return false;
+            if (fieldName !== "url" && fieldName !== "detail") return false;
+            var d = document.createElement("div");
+            d.textContent = v;
+            var escaped = d.innerHTML;
+            var href = v.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/'/g, "&#39;").replace(/</g, "&lt;");
+            return '<a href="' + href + '" target="_blank" rel="noopener noreferrer">' + escaped + '</a>';
+          }
+
+          // Expose API globally
+          window.llmapsSidebarOpen = sidebarOpen;
+          window.llmapsSidebarClose = sidebarClose;
+
+          // Register click handlers
+          window.llmapsOnLayersReady(function(m) {
+            var layerIds = Object.keys(sbFieldsByLayer);
+            if (!layerIds.length) {
+              layerIds = layers.map(function(l) { return l.id; });
+            }
+            layerIds.forEach(function(layerId) {
+              if (!m.getLayer(layerId)) return;
+              m.on("click", layerId, function(ev) {
+                var feat = ev.features && ev.features[0];
+                if (!feat) {
+                  if (ev.features && ev.features.length === 0 && console && typeof console.warn === "function")
+                    console.warn("LLMaps sidebar: click on layer " + layerId + " returned no features");
+                  return;
+                }
+                if (ev.originalEvent) ev.originalEvent.stopPropagation();
+                if (typeof ev.preventDefault === "function") ev.preventDefault();
+                sbIgnoreNextMapClick = true;
+                sidebarOpen(layerId, feat);
+                if (sbZoomOnClick != null) {
+                  var g = feat.geometry;
+                  if (g && g.type === "Point" && g.coordinates) {
+                    m.flyTo({ center: g.coordinates, zoom: sbZoomOnClick, duration: 1500 });
+                  }
+                }
+              });
+            });
+
+            if (sbCloseOnMapClick) {
+              m.on("click", function(ev) {
+                if (sbIgnoreNextMapClick) {
+                  sbIgnoreNextMapClick = false;
+                  return;
+                }
+                if (!ev.defaultPrevented) sidebarClose();
+              });
+            }
+          });
+        }
+
+        // Dashboard
+        const dashboardConfig = components.find(c => c.type === "dashboard");
+        if (dashboardConfig) {
+          const dashboardId = dashboardConfig.dashboard_id || "dashboard";
+          const dashboardPosition = dashboardConfig.position || "top-right";
+          const dashboardTitle = dashboardConfig.title || "Dashboard";
+          const dashboardWidth = dashboardConfig.width || 360;
+          const dashboardHeight = dashboardConfig.height;
+          const dashboardCollapsible = dashboardConfig.collapsible !== false;
+          const dashboardFilters = Array.isArray(dashboardConfig.filters) ? dashboardConfig.filters : [];
+          const dashboardEmptyState = dashboardConfig.empty_state || "No dashboard content yet.";
+          const dashboardEl = document.createElement("section");
+          const dashboardHeader = document.createElement("div");
+          const dashboardTitleEl = document.createElement("h2");
+          const dashboardBody = document.createElement("div");
+          const dashboardFilterBar = document.createElement("div");
+          const dashboardContent = document.createElement("div");
+          let dashboardToggleBtn = null;
+          const dashboardState = {};
+
+          dashboardEl.className = "llmaps-dashboard " + dashboardPosition;
+          dashboardEl.setAttribute("data-dashboard-id", dashboardId);
+          dashboardEl.style.setProperty("--llmaps-dashboard-width", dashboardWidth + "px");
+          if (dashboardHeight != null) {
+            dashboardEl.style.setProperty("--llmaps-dashboard-height", dashboardHeight + "px");
+          }
+
+          dashboardHeader.className = "llmaps-dashboard-header";
+          dashboardTitleEl.className = "llmaps-dashboard-title";
+          dashboardTitleEl.textContent = dashboardTitle;
+          dashboardHeader.appendChild(dashboardTitleEl);
+
+          if (dashboardCollapsible) {
+            dashboardToggleBtn = document.createElement("button");
+            dashboardToggleBtn.type = "button";
+            dashboardToggleBtn.className = "llmaps-dashboard-toggle";
+            dashboardToggleBtn.setAttribute("aria-label", "Toggle dashboard");
+            dashboardHeader.appendChild(dashboardToggleBtn);
+          }
+
+          dashboardBody.className = "llmaps-dashboard-body";
+          dashboardFilterBar.className = "llmaps-dashboard-filters";
+          dashboardContent.className = "llmaps-dashboard-content";
+          dashboardBody.appendChild(dashboardFilterBar);
+          dashboardBody.appendChild(dashboardContent);
+          dashboardEl.appendChild(dashboardHeader);
+          dashboardEl.appendChild(dashboardBody);
+
+          function dashboardSetContent(html) {
+            dashboardContent.innerHTML = "";
+            if (html && String(html).trim() !== "") {
+              dashboardContent.innerHTML = html;
+              dashboardContent.classList.remove("is-empty");
+              return;
+            }
+            dashboardContent.classList.add("is-empty");
+            const emptyEl = document.createElement("div");
+            emptyEl.className = "llmaps-dashboard-empty";
+            emptyEl.textContent = dashboardEmptyState;
+            dashboardContent.appendChild(emptyEl);
+          }
+
+          function dashboardDispatch(filterId, value) {
+            window.dispatchEvent(new CustomEvent("llmaps:dashboard-filter-change", {
+              detail: {
+                dashboardId: dashboardId,
+                filterId: filterId,
+                value: value,
+                state: Object.assign({}, dashboardState),
+              }
+            }));
+          }
+
+          function dashboardNormalizeOptions(options) {
+            if (!Array.isArray(options)) return [];
+            return options.map(function(option) {
+              if (option && typeof option === "object" && option.value !== undefined) {
+                return {
+                  value: String(option.value),
+                  label: String(option.label != null ? option.label : option.value),
+                };
+              }
+              return { value: String(option), label: String(option) };
+            });
+          }
+
+          function dashboardResolveDateLocale() {
+            if (!window.flatpickr) return "default";
+            if (normalizedLocale.toLowerCase().indexOf("ru") === 0) {
+              return (window.flatpickr.l10ns && window.flatpickr.l10ns.ru) || "ru";
+            }
+            return "default";
+          }
+
+          function dashboardCreateFilter(filterConfig, index) {
+            const filterId = filterConfig.id || ("filter-" + index);
+            const filterType = filterConfig.type || "select";
+            const filterWrap = document.createElement("label");
+            const filterLabel = document.createElement("span");
+            let input;
+            let emitEventName = filterType === "text" ? "input" : "change";
+
+            filterWrap.className = "llmaps-dashboard-filter";
+            filterWrap.setAttribute("data-filter-id", filterId);
+            filterLabel.className = "llmaps-dashboard-filter-label";
+            filterLabel.textContent = filterConfig.label || filterId;
+            filterWrap.appendChild(filterLabel);
+
+            if (filterType === "select") {
+              input = document.createElement("select");
+              dashboardNormalizeOptions(filterConfig.options).forEach(function(option) {
+                const optionEl = document.createElement("option");
+                optionEl.value = option.value;
+                optionEl.textContent = option.label;
+                input.appendChild(optionEl);
+              });
+            } else {
+              input = document.createElement("input");
+              input.type = "text";
+              if (filterConfig.placeholder) input.placeholder = filterConfig.placeholder;
+            }
+
+            input.className = "llmaps-dashboard-filter-input";
+            input.setAttribute("lang", normalizedLocale);
+            if (filterConfig.value != null) input.value = String(filterConfig.value);
+            dashboardState[filterId] = input.value;
+
+            if (filterType === "date" && window.flatpickr) {
+              window.flatpickr(input, {
+                dateFormat: "Y-m-d",
+                defaultDate: filterConfig.value != null ? String(filterConfig.value) : null,
+                allowInput: true,
+                disableMobile: true,
+                locale: dashboardResolveDateLocale(),
+                onChange: function(selectedDates, dateStr) {
+                  dashboardState[filterId] = dateStr;
+                  dashboardDispatch(filterId, dateStr);
+                },
+              });
+              input.addEventListener("input", function() {
+                dashboardState[filterId] = input.value;
+              });
+            } else {
+              input.addEventListener(emitEventName, function() {
+                dashboardState[filterId] = input.value;
+                dashboardDispatch(filterId, input.value);
+              });
+            }
+
+            filterWrap.appendChild(input);
+            dashboardFilterBar.appendChild(filterWrap);
+          }
+
+          function dashboardSetCollapsed(collapsed) {
+            dashboardEl.classList.toggle("collapsed", !!collapsed);
+            if (dashboardToggleBtn) {
+              dashboardToggleBtn.textContent = collapsed ? "+" : "-";
+              dashboardToggleBtn.setAttribute("aria-expanded", collapsed ? "false" : "true");
+            }
+          }
+
+          dashboardFilters.forEach(dashboardCreateFilter);
+          if (!dashboardFilters.length) {
+            dashboardFilterBar.style.display = "none";
+          }
+
+          if (dashboardToggleBtn) {
+            dashboardToggleBtn.addEventListener("click", function() {
+              dashboardSetCollapsed(!dashboardEl.classList.contains("collapsed"));
+            });
+          }
+
+          if (!window.llmapsDashboards) window.llmapsDashboards = {};
+          window.llmapsDashboards[dashboardId] = {
+            element: dashboardEl,
+            state: dashboardState,
+            setContent: dashboardSetContent,
+            setTitle: function(title) { dashboardTitleEl.textContent = title; },
+            setCollapsed: dashboardSetCollapsed,
+          };
+          window.llmapsDashboardSetContent = function(id, html) {
+            var dashboard = window.llmapsDashboards && window.llmapsDashboards[id];
+            if (dashboard) dashboard.setContent(html);
+          };
+          window.llmapsDashboardSetTitle = function(id, title) {
+            var dashboard = window.llmapsDashboards && window.llmapsDashboards[id];
+            if (dashboard) dashboard.setTitle(title);
+          };
+          window.llmapsDashboardGetState = function(id) {
+            var dashboard = window.llmapsDashboards && window.llmapsDashboards[id];
+            return dashboard ? Object.assign({}, dashboard.state) : null;
+          };
+          window.llmapsDashboardSetCollapsed = function(id, collapsed) {
+            var dashboard = window.llmapsDashboards && window.llmapsDashboards[id];
+            if (dashboard) dashboard.setCollapsed(collapsed);
+          };
+
+          map.getContainer().appendChild(dashboardEl);
+          dashboardSetContent(dashboardConfig.content_html || "");
+          dashboardSetCollapsed(!!dashboardConfig.collapsed);
+        }
+
+        // FeatureSearch — search within map data attributes
+        const featureSearchConfig = components.find(c => c.type === "feature_search");
+        if (featureSearchConfig) {
+          const fsPosition = featureSearchConfig.position || "top-center";
+          const fsPlaceholder = featureSearchConfig.placeholder || "Search...";
+          const fsSearchFields = featureSearchConfig.search_fields || {};
+          const fsFieldLabels = featureSearchConfig.field_labels || {};
+          const fsMaxResults = featureSearchConfig.max_results || 15;
+          const fsZoom = featureSearchConfig.zoom_on_select || 8;
+          const fsDebounce = featureSearchConfig.debounce_ms || 200;
+          const fsMinChars = featureSearchConfig.min_chars || 2;
+
+          // Build DOM
+          const fsWrap = document.createElement("div");
+          fsWrap.className = "llmaps-feature-search " + fsPosition;
+          const fsInput = document.createElement("input");
+          fsInput.type = "text";
+          fsInput.placeholder = fsPlaceholder;
+          fsInput.autocomplete = "off";
+          fsInput.className = "llmaps-feature-search-input";
+          fsWrap.appendChild(fsInput);
+          const fsDropdown = document.createElement("div");
+          fsDropdown.className = "llmaps-feature-search-dropdown";
+          fsWrap.appendChild(fsDropdown);
+          map.getContainer().appendChild(fsWrap);
+
+          // Cache source data for searching
+          var _fsCache = {};
+
+          function fsBuildCache() {
+            var sourceIds = Object.keys(fsSearchFields);
+            sourceIds.forEach(function(sourceId) {
+              if (_fsCache[sourceId]) return;
+              if (typeof window.llmapsGetSourceData === "function") {
+                window.llmapsGetSourceData(sourceId).then(function(geojson) {
+                  if (geojson && geojson.features) {
+                    _fsCache[sourceId] = geojson.features;
+                  }
+                });
+              }
+            });
+          }
+
+          function fsSearch(query) {
+            var results = [];
+            var qLower = query.toLowerCase();
+            var sourceIds = Object.keys(fsSearchFields);
+
+            for (var si = 0; si < sourceIds.length; si++) {
+              if (results.length >= fsMaxResults) break;
+              var sourceId = sourceIds[si];
+              var fields = fsSearchFields[sourceId] || [];
+              var features = _fsCache[sourceId] || [];
+
+              for (var fi = 0; fi < features.length; fi++) {
+                if (results.length >= fsMaxResults) break;
+                var feat = features[fi];
+                var props = feat.properties || {};
+
+                for (var ki = 0; ki < fields.length; ki++) {
+                  var fieldName = fields[ki];
+                  var val = props[fieldName];
+                  if (val == null) continue;
+                  if (String(val).toLowerCase().includes(qLower)) {
+                    var label = String(val);
+                    var secondary = "";
+                    for (var xi = 0; xi < fields.length; xi++) {
+                      if (xi === ki) continue;
+                      var sv = props[fields[xi]];
+                      if (sv != null) { secondary = String(sv); break; }
+                    }
+                    results.push({
+                      sourceId: sourceId,
+                      feature: feat,
+                      label: label,
+                      secondary: secondary,
+                      fieldLabel: fsFieldLabels[fieldName] || fieldName,
+                    });
+                    break;
+                  }
+                }
+              }
+            }
+            return results;
+          }
+
+          function fsRenderResults(results) {
+            fsDropdown.innerHTML = "";
+            if (results.length === 0) {
+              fsDropdown.innerHTML = '<div class="llmaps-feature-search-empty">No results</div>';
+              fsDropdown.classList.add("visible");
+              return;
+            }
+            results.forEach(function(r) {
+              var div = document.createElement("div");
+              div.className = "llmaps-feature-search-item";
+              var text = r.label;
+              if (r.secondary) text += " \u2014 " + r.secondary;
+              div.textContent = text;
+              var badge = document.createElement("span");
+              badge.className = "llmaps-feature-search-item-source";
+              badge.textContent = r.fieldLabel;
+              div.appendChild(badge);
+              div.addEventListener("click", function() {
+                fsDropdown.classList.remove("visible");
+                fsInput.value = "";
+                fsFlyToFeature(r.feature);
+                if (typeof window.llmapsSidebarOpen === "function") {
+                  var layerCfg = (config.layers || []).find(function(l) { return l.source === r.sourceId; });
+                  if (layerCfg) window.llmapsSidebarOpen(layerCfg.id, r.feature);
+                }
+              });
+              fsDropdown.appendChild(div);
+            });
+            fsDropdown.classList.add("visible");
+          }
+
+          function fsFlyToFeature(feature) {
+            var g = feature.geometry;
+            if (!g) return;
+            if (g.type === "Point" && g.coordinates) {
+              maps.forEach(function(m) {
+                m.flyTo({ center: g.coordinates, zoom: fsZoom, duration: 1500 });
+              });
+            } else {
+              var bounds = new maplibregl.LngLatBounds();
+              _fsForEachCoord(g, function(c) { bounds.extend(c); });
+              if (!bounds.isEmpty()) {
+                maps.forEach(function(m) {
+                  m.fitBounds(bounds, { padding: 50, maxZoom: fsZoom });
+                });
+              }
+            }
+          }
+
+          function _fsForEachCoord(geometry, fn) {
+            if (geometry.type === "Point") { fn(geometry.coordinates); return; }
+            if (geometry.type === "MultiPoint") { geometry.coordinates.forEach(fn); return; }
+            if (geometry.type === "LineString") { geometry.coordinates.forEach(fn); return; }
+            if (geometry.type === "Polygon") { geometry.coordinates[0].forEach(fn); return; }
+            if (geometry.type === "MultiPolygon") {
+              geometry.coordinates.forEach(function(poly) { poly[0].forEach(fn); });
+              return;
+            }
+            if (geometry.type === "MultiLineString") {
+              geometry.coordinates.forEach(function(line) { line.forEach(fn); });
+            }
+          }
+
+          var fsTimer;
+          fsInput.addEventListener("input", function() {
+            clearTimeout(fsTimer);
+            var q = fsInput.value.trim();
+            if (q.length < fsMinChars) { fsDropdown.classList.remove("visible"); return; }
+            fsTimer = setTimeout(function() { fsRenderResults(fsSearch(q)); }, fsDebounce);
+          });
+          fsInput.addEventListener("keydown", function(e) {
+            if (e.key === "Enter") {
+              e.preventDefault();
+              var firstItem = fsDropdown.querySelector(".llmaps-feature-search-item");
+              if (firstItem) firstItem.click();
+            }
+            if (e.key === "Escape") { fsDropdown.classList.remove("visible"); fsInput.blur(); }
+          });
+          document.addEventListener("click", function(e) {
+            if (!fsWrap.contains(e.target)) fsDropdown.classList.remove("visible");
+          });
+
+          window.llmapsOnLayersReady(function() { fsBuildCache(); });
+        }
+
+        const searchConfig = components.find(c => c.type === "search");
+        if (searchConfig && maps.length > 0) {
+          const wrap = document.createElement("div");
+          wrap.className = "llmaps-search-wrap " + (searchConfig.position || "top-left");
+          const input = document.createElement("input");
+          input.type = "text";
+          input.placeholder = searchConfig.placeholder || "Search address...";
+          input.id = "llmaps-address-search";
+          wrap.appendChild(input);
+          const suggestions = document.createElement("div");
+          suggestions.className = "llmaps-search-suggestions";
+          suggestions.id = "llmaps-search-suggestions";
+          wrap.appendChild(suggestions);
+          document.body.appendChild(wrap);
+
+          const zoomOnResult = searchConfig.zoom_on_result ?? 15;
+          const geocoderUrl = searchConfig.geocoder_url;
+          const geocoderParams = searchConfig.geocoder_params || {};
+          const autocomplete = searchConfig.autocomplete !== false;
+
+          function parseCoords(data) {
+            if (Array.isArray(data.center)) return data.center;
+            if (data.lon != null && data.lat != null) return [data.lon, data.lat];
+            if (data.lng != null && data.lat != null) return [data.lng, data.lat];
+            const f = data.features && data.features[0];
+            if (f && f.geometry && f.geometry.coordinates)
+              return f.geometry.coordinates;
+            const m = data.response && data.response.GeoObjectCollection && data.response.GeoObjectCollection.featureMember;
+            if (m && m[0]) {
+              const pos = m[0].GeoObject.Point.pos;
+              return pos.split(" ").map(Number);
+            }
+            return null;
+          }
+
+          function buildGeocoderUrl(query, results) {
+            if (!geocoderUrl) return null;
+            const url = new URL(geocoderUrl);
+            url.searchParams.set("geocode", query);
+            if (results != null) url.searchParams.set("results", String(results));
+            Object.entries(geocoderParams).forEach(([k, v]) => url.searchParams.set(k, v));
+            return url.toString();
+          }
+
+          function flyToCoords(lon, lat) {
+            maps.forEach(m => {
+              if (m && m.flyTo) m.flyTo({ center: [lon, lat], zoom: zoomOnResult, duration: 2000 });
+            });
+          }
+
+          let debounceTimer;
+          function doSearch(address) {
+            const url = buildGeocoderUrl(address, 1);
+            if (!url) { console.warn("Search: geocoder_url not set"); return; }
+            fetch(url).then(r => r.json()).then(data => {
+              const coords = parseCoords(data);
+              if (coords) flyToCoords(coords[0], coords[1]);
+            }).catch(e => console.error("Geocoder error", e));
+          }
+
+          function showSuggestions(query) {
+            const url = buildGeocoderUrl(query, 5);
+            if (!url) return;
+            fetch(url).then(r => r.json()).then(data => {
+              const list = data.response && data.response.GeoObjectCollection && data.response.GeoObjectCollection.featureMember;
+              suggestions.innerHTML = "";
+              suggestions.classList.remove("visible");
+              if (list && list.length) {
+                list.slice(0, 5).forEach(item => {
+                  const text = item.GeoObject && item.GeoObject.metaDataProperty && item.GeoObject.metaDataProperty.GeocoderMetaData
+                    ? item.GeoObject.metaDataProperty.GeocoderMetaData.text
+                    : (item.GeoObject && item.GeoObject.name) || "";
+                  const div = document.createElement("div");
+                  div.textContent = text;
+                  div.onclick = () => { input.value = text; doSearch(text); suggestions.classList.remove("visible"); };
+                  suggestions.appendChild(div);
+                });
+                suggestions.classList.add("visible");
+              }
+            }).catch(() => {});
+          }
+
+          input.addEventListener("keypress", function(e) {
+            if (e.key === "Enter") { e.preventDefault(); doSearch(input.value.trim()); }
+          });
+          if (autocomplete) {
+            input.addEventListener("input", function() {
+              clearTimeout(debounceTimer);
+              const q = input.value.trim();
+              if (q.length < 3) { suggestions.classList.remove("visible"); return; }
+              debounceTimer = setTimeout(() => showSuggestions(q), 300);
+            });
+            input.addEventListener("blur", () => setTimeout(() => suggestions.classList.remove("visible"), 200));
+          }
+        }
+      }
+
+
+
+      window._llmapsLifecycle = {
+        maxActiveMaps: 8,
+        active: [],
+        lastUsed: null,
+        observers: null
+      };
+
+      function _llmapsLifecycleTouch(entry) {
+        entry.lastUsed = Date.now();
+      }
+
+      function _llmapsLifecycleEvictLRU() {
+        const L = window._llmapsLifecycle;
+        if (L.active.length <= L.maxActiveMaps) return;
+        L.active.sort(function(a, b) { return (a.lastUsed || 0) - (b.lastUsed || 0); });
+        while (L.active.length > L.maxActiveMaps && L.active.length > 0) {
+          const entry = L.active.shift();
+          if (typeof entry.dispose === "function") entry.dispose();
+        }
+      }
+
+      function _llmapsLifecycleRemoveEntry(entry) {
+        window._llmapsLifecycle.active = window._llmapsLifecycle.active.filter(function(e) { return e !== entry; });
+      }
+
+      function initLifecycleWithObserver(rootId, MAP_CONFIG, createMapOnce) {
+        const root = document.getElementById(rootId);
+        if (!root) return;
+        const maxActiveMaps = Math.max(1, Math.min(16, (MAP_CONFIG.max_active_maps || 8)));
+        window._llmapsLifecycle.maxActiveMaps = maxActiveMaps;
+        window._llmapsLifecycle.lastUsed = window._llmapsLifecycle.lastUsed || Date.now();
+
+        const isComparison = MAP_CONFIG.comparison && MAP_CONFIG.comparison.left_layers && MAP_CONFIG.comparison.right_layers;
+        const visibilityIds = MAP_CONFIG.visibility_optimization_source_ids || [];
+
+        function disposeCurrent() {
+          const L = window._llmapsLifecycle;
+          const entry = L.active.find(function(e) { return e.rootId === rootId; });
+          if (!entry) return;
+          if (typeof entry.dispose === "function") entry.dispose();
+          _llmapsLifecycleRemoveEntry(entry);
+        }
+
+        function ensureMap() {
+          const L = window._llmapsLifecycle;
+          var entry = L.active.find(function(e) { return e.rootId === rootId; });
+          if (entry) {
+            _llmapsLifecycleTouch(entry);
+            return;
+          }
+          _llmapsLifecycleEvictLRU();
+          var result = createMapOnce();
+          entry = { rootId: rootId, rootElement: root, lastUsed: Date.now() };
+          if (isComparison && result && (result.mapLeft || result.mapRight)) {
+            entry.maps = [result.mapLeft, result.mapRight].filter(Boolean);
+            window.llmaps_maps = entry.maps;
+            window.llmaps_map = entry.maps[0] || null;
+            if (visibilityIds.length && typeof initVisibilityOptimization === "function")
+              initVisibilityOptimization(entry.maps, visibilityIds);
+            addComponents(MAP_CONFIG, entry.maps);
+            entry.dispose = function() {
+              if (entry.maps) entry.maps.forEach(function(m) { if (typeof destroySingleMap === "function") destroySingleMap(m); });
+              entry.maps = null;
+              if (entry.rootElement) { entry.rootElement.id = rootId; entry.rootElement.innerHTML = ""; }
+            };
+          } else {
+            var map = result;
+            entry.map = map;
+            window.llmaps_map = map;
+            window.llmaps_maps = [map];
+            if (visibilityIds.length && typeof initVisibilityOptimization === "function")
+              initVisibilityOptimization(map, visibilityIds);
+            addComponents(MAP_CONFIG, map);
+            entry.dispose = function() {
+              if (entry.map && typeof destroySingleMap === "function") destroySingleMap(entry.map);
+              entry.map = null;
+            };
+          }
+          L.active.push(entry);
+        }
+
+        var observer = new IntersectionObserver(
+          function(entries) {
+            entries.forEach(function(ev) {
+              if (ev.target !== root) return;
+              if (ev.isIntersecting) ensureMap(); else disposeCurrent();
+            });
+          },
+          { root: null, rootMargin: "0px", threshold: 0.01 }
+        );
+        observer.observe(root);
+        if (window._llmapsLifecycle.observers) window._llmapsLifecycle.observers.push(observer); else window._llmapsLifecycle.observers = [observer];
+
+        if (root.getBoundingClientRect && root.getBoundingClientRect().height > 0 && root.getBoundingClientRect().width > 0) {
+          var rect = root.getBoundingClientRect();
+          if (rect.top < (window.innerHeight || document.documentElement.clientHeight) && rect.bottom > 0) ensureMap();
+        }
+      }
+
+      function createMap() {
+        const MAP_CONFIG = readConfig();
+        const root = document.getElementById("map-root");
+        if (!root) return;
+
+        const visibilityIds = MAP_CONFIG.visibility_optimization_source_ids || [];
+
+        if (MAP_CONFIG.comparison && MAP_CONFIG.comparison.left_layers && MAP_CONFIG.comparison.right_layers) {
+          const { mapLeft, mapRight } = setupComparison(root, MAP_CONFIG);
+          return { mapLeft: mapLeft, mapRight: mapRight };
+        }
+
+        const map = createSingleMap(
+          "map-root",
+          MAP_CONFIG,
+          null,
+          MAP_CONFIG.embedded_sources,
+          { hashSync: isHashPositionEnabled(MAP_CONFIG) }
+        );
+        window.llmaps_map = map;
+        window.llmaps_maps = [map];
+        if (visibilityIds.length && typeof initVisibilityOptimization === "function")
+          initVisibilityOptimization(map, visibilityIds);
+        addComponents(MAP_CONFIG, map);
+        return map;
+      }
+
+      function initMap() {
+        const MAP_CONFIG = readConfig();
+        var instanceCount = Math.max(1, MAP_CONFIG.map_instance_count || 1);
+        var useLifecycle = MAP_CONFIG.lazy_init && instanceCount >= 3 && typeof initLifecycleWithObserver === "function";
+        if (useLifecycle) {
+          initLifecycleWithObserver("map-root", MAP_CONFIG, createMap);
+          return;
+        }
+        var result = createMap();
+        if (result && (result.mapLeft || result.mapRight)) {
+          window.llmaps_maps = [result.mapLeft, result.mapRight];
+          var visibilityIds = MAP_CONFIG.visibility_optimization_source_ids || [];
+          if (visibilityIds.length && typeof initVisibilityOptimization === "function")
+            initVisibilityOptimization(window.llmaps_maps, visibilityIds);
+          addComponents(MAP_CONFIG, window.llmaps_maps);
+        }
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initMap);
+      } else {
+        initMap();
+      }
+        // Legend interactivity (server-rendered legend)
+        (function() {
+            const legendEl = document.querySelector('.llmaps-legend');
+            if (!legendEl) return;
+
+            // Toggle legend collapse/expand
+            const toggleBtn = document.getElementById('llmaps-legend-toggle');
+            if (toggleBtn) {
+                toggleBtn.addEventListener('click', function() {
+                    legendEl.classList.toggle('collapsed');
+                });
+            }
+
+            // Layer visibility toggles (iOS-style switches)
+            const toggles = legendEl.querySelectorAll('.llmaps-layer-toggle input[type="checkbox"]');
+            toggles.forEach(function(checkbox) {
+                checkbox.addEventListener('change', function() {
+                    const layerId = this.getAttribute('data-layer-id');
+                    const visibility = this.checked ? 'visible' : 'none';
+                    
+                    // Apply to all maps (supports comparison mode)
+                    const maps = window.llmaps_maps || [window.llmaps_map];
+                    maps.forEach(function(map) {
+                        if (map && map.getLayer && map.getLayer(layerId)) {
+                            map.setLayoutProperty(layerId, 'visibility', visibility);
+                        }
+                    });
+                });
+            });
+
+            // Basemap switcher
+            const basemapSelect = document.getElementById('llmaps-basemap-select');
+            if (basemapSelect && window.llmaps_switchBasemap) {
+                basemapSelect.addEventListener('change', function() {
+                    window.llmaps_switchBasemap(this.value);
+                });
+            }
+
+            // Instructions toggle
+            const tipsHeader = document.getElementById('llmaps-tips-header');
+            const tipsContent = document.getElementById('llmaps-tips-content');
+            if (tipsHeader && tipsContent) {
+                tipsHeader.addEventListener('click', function() {
+                    tipsHeader.classList.toggle('collapsed');
+                    tipsContent.classList.toggle('collapsed');
+                });
+            }
+        })();</script>
+    <script>
+(function () {
+  var RED = '#EE3426';
+  var DATA = (window.llmapsData && window.llmapsData.settlements) || [];
+  var STATS = (window.llmapsData && window.llmapsData.stats) || {};
+  var R_MAX = 30;                       // px радиус самого крупного пункта
+  var POP_MAX = STATS.pop_max || 1;
+  var TRIPS_MAX = STATS.trips_max || 1;
+  var K = R_MAX / Math.sqrt(POP_MAX);   // радиус ~ sqrt(население) => площадь ~ население
+  var TAU = Math.PI * 2;
+
+  var fmtInt = new Intl.NumberFormat('ru-RU', { maximumFractionDigits: 0 });
+  var fmtTrips = new Intl.NumberFormat('ru-RU', { maximumFractionDigits: 1 });
+
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  // Дуга кольца: от 12 часов по часовой стрелке на span радиан.
+  function arcPath(r, span) {
+    if (span >= TAU - 0.02) {
+      // полное кольцо рисуем двумя дугами (SVG не умеет 360-градусную дугу)
+      return 'M 0 ' + (-r) +
+        ' A ' + r + ' ' + r + ' 0 1 1 0 ' + r +
+        ' A ' + r + ' ' + r + ' 0 1 1 0 ' + (-r);
+    }
+    var a = -Math.PI / 2 + span;
+    var x = r * Math.cos(a), y = r * Math.sin(a);
+    var large = span > Math.PI ? 1 : 0;
+    return 'M 0 ' + (-r) + ' A ' + r + ' ' + r + ' 0 ' + large + ' 1 ' + x.toFixed(3) + ' ' + y.toFixed(3);
+  }
+
+  function svgRing(r, span, popR) {
+    var size = Math.ceil(2 * (r + 9));
+    var c = size / 2;
+    var hit = Math.max(r + 7, 11);
+    var pop = popR != null ? popR : r;
+    var s = '<svg width="' + size + '" height="' + size + '" viewBox="0 0 ' + size + ' ' + size + '">';
+    s += '<g transform="translate(' + c + ' ' + c + ')">';
+    s += '<circle class="kk-pop" r="' + pop.toFixed(2) + '"/>';
+    if (span > 0) {
+      var d = arcPath(r, span);
+      s += '<path class="kk-glow" d="' + d + '"/>';
+      s += '<path class="kk-arc" d="' + d + '"/>';
+    }
+    s += '<circle class="kk-anchor" r="1.6"/>';
+    s += '<circle class="kk-hit" r="' + hit + '"/>';
+    s += '</g></svg>';
+    return s;
+  }
+
+  function svgNoData(r) {
+    var size = Math.ceil(2 * (r + 9));
+    var c = size / 2;
+    var hit = Math.max(r + 7, 11);
+    var s = '<svg width="' + size + '" height="' + size + '" viewBox="0 0 ' + size + ' ' + size + '">';
+    s += '<g transform="translate(' + c + ' ' + c + ')">';
+    s += '<circle class="kk-nodata" r="' + Math.max(r, 4).toFixed(2) + '"/>';
+    s += '<circle class="kk-hit" r="' + hit + '"/>';
+    s += '</g></svg>';
+    return s;
+  }
+
+  function tipHtml(d) {
+    var pop = d.population != null ? fmtInt.format(d.population) + ' чел.' : '<span class="kk-na">нет данных</span>';
+    var trips = d.trips != null
+      ? '<span class="kk-hl">' + fmtTrips.format(d.trips) + '</span>'
+      : '<span class="kk-na">нет данных</span>';
+    return '<div class="kk-t-name">' + esc(d.full_name) + '</div>' +
+      '<div class="kk-t-row"><span>Население</span><span>' + pop + '</span></div>' +
+      '<div class="kk-t-row"><span>Поездок на чел. в год (2025)</span><span>' + trips + '</span></div>';
+  }
+
+  function addMarkers(map) {
+    var visible = 0, noTrips = 0;
+    DATA.forEach(function (d) {
+      if (d.lat == null || d.lon == null) return;   // без координат не наносим
+      var el = document.createElement('div');
+      el.className = 'kk-marker';
+      var popR = d.population != null ? K * Math.sqrt(d.population) : null;
+      var baseR = popR != null ? popR : 5;
+      var span = d.trips != null ? (d.trips / TRIPS_MAX) * TAU : 0;
+      el.innerHTML = (d.trips != null ? svgRing(baseR, span, popR) : svgNoData(baseR)) +
+        '<div class="kk-tip">' + tipHtml(d) + '</div>';
+      if (d.trips == null) noTrips++; else visible++;
+      var marker = new maplibregl.Marker({ element: el, anchor: 'center' })
+        .setLngLat([d.lon, d.lat])
+        .addTo(map);
+      // подсказка не должна перехватывать мышь и должна быть внутри маркера по размеру
+      var tip = el.querySelector('.kk-tip');
+      tip.style.pointerEvents = 'none';
+    });
+    // счётчики легенды
+    var nd = document.getElementById('kk-nodata-count');
+    var tt = document.getElementById('kk-total-count');
+    if (nd) nd.textContent = STATS.without_trips;
+    if (tt) tt.textContent = STATS.total;
+    var range = document.getElementById('kk-range-text');
+    if (range) range.textContent = fmtTrips.format(STATS.trips_min) + ' – ' + fmtTrips.format(STATS.trips_max);
+    var sum = document.getElementById('kk-nocoord-summary');
+    if (sum) sum.textContent = 'Не отображены — нет координат (' + (STATS.no_coords_names || []).length + ')';
+    var list = document.getElementById('kk-nocoord-list');
+    if (list) (STATS.no_coords_names || []).forEach(function (n) {
+      var li = document.createElement('li'); li.textContent = n; list.appendChild(li);
+    });
+    // образцы кольца в легенде: 100 / 300 / максимум
+    var scale = document.getElementById('kk-scale-rings');
+    if (scale) {
+      [100, 300, Math.round(TRIPS_MAX)].forEach(function (v) {
+        var item = document.createElement('div');
+        item.className = 'kk-item';
+        var r = 13, span = (v / TRIPS_MAX) * TAU;
+        item.innerHTML = '<svg width="34" height="34" viewBox="-17 -17 34 34">' +
+          '<path class="kk-arc" style="stroke-width:2.4" d="' + arcPath(r, span) + '"/>' +
+          '</svg><div>≈ ' + fmtTrips.format(v) + '</div>';
+        scale.appendChild(item);
+      });
+    }
+  }
+
+  function boot() {
+    var map = window.llmaps_map;
+    // Маркеры не зависят от загрузки тайлов: стартуем, как только создана карта
+    if (!map) { setTimeout(boot, 60); return; }
+    start(map);
+  }
+
+  function start(map) {
+    map.fitBounds([[37.35, 43.25], [41.75, 47.55]], {
+      padding: { top: 90, bottom: 40, left: 40, right: 370 },
+      duration: 0, maxZoom: 8.5
+    });
+    addMarkers(map);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
+})();
+</script>
+  </body>
+</html>
